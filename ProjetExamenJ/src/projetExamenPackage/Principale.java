@@ -21,6 +21,6 @@ public class Principale {
 		catch (SQLException e) {
 			System.out.println(e.getMessage()); }
 			}
-	//Projet
+	//Projettest
 }
 		
