@@ -3,13 +3,17 @@ package projetExamenPackage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+
 import projetExamenPackage.AccessBDGen; 
 
 public class Principale {
 
 	public static void main(String[] args) {
+		Fenetre f = new Fenetre();
+		
 		  
-		try {
+		/*try {
 			Connection connection = AccessBDGen.connecter("DbInstallations","root", "Tigrou007"); // Etablir la connexion ("le câble qui relie le programme Java à la BD")  
 			String sqlInstruction = "insert into FamilleSoftware (IdFamSoft, Libelle)values (?,?)"; 
 			PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); // Créer le PreparedStatement à partir de cette instruction SQL ("chariotsur câble")
@@ -19,8 +23,8 @@ public class Principale {
 			System.out.println("Nombre de lignes modifiées: " + nbUpdatedLines); // Récupérer le nombre de lignes modifiées et l'afficher		
 		}
 		catch (SQLException e) {
-			System.out.println(e.getMessage()); }
-			}
-	//Max
+			System.out.println(e.getMessage()); }*/
+	
+	}
 }
 		
