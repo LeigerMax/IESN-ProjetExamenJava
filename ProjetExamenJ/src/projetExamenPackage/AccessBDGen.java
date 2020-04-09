@@ -10,17 +10,16 @@ public class AccessBDGen
     /* Crée une connexion à une base de données à partir du nom logique de la BD,
      * du nom de l'utilisateur et du mot de passe.
      */
-	public static Connection connecter(String bd, String user, String pass)
-            throws SQLException
-{Connection connexion = null;
- try { Class.forName("com.mysql.jdbc.Driver");
-       connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+bd+"?useSSL=false",user,pass);
-     }
- catch (ClassNotFoundException ex)
-    {ex.printStackTrace();
-    }
- return connexion;
-}
+	public static Connection connecter(String bd, String user, String pass) throws SQLException {
+		Connection connexion = null;
+		 try { Class.forName("com.mysql.jdbc.Driver");
+		       connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+bd+"?useSSL=false",user,pass);
+		     }
+		 catch (ClassNotFoundException ex)
+		    {ex.printStackTrace();
+		    }
+		 return connexion;
+		}
 
  
 
@@ -28,27 +27,25 @@ public class AccessBDGen
     /* Exécute une requête d'accès en lecture à la BD (select)
      * et récupère le modéle des données résultant de la requête (ensemble de lignes et de colonnes)
      */
-    public static TableModelGen creerTableModel (PreparedStatement prepStat)
-         throws SQLException
-    {ResultSet donnees = prepStat.executeQuery();
-     ArrayList <String> nomColonnes = creerNomColonnes(donnees);
-     ArrayList <Object> lignes = creerLignes(donnees);
-     ArrayList <Object> objetTypes = creerObjetTypes(donnees);
-     TableModelGen model = new TableModelGen(nomColonnes,lignes, objetTypes);
-     return model;
-    }
+    public static TableModelGen creerTableModel (PreparedStatement prepStat) throws SQLException {
+    	ResultSet donnees = prepStat.executeQuery();
+	     ArrayList <String> nomColonnes = creerNomColonnes(donnees);
+	     ArrayList <Object> lignes = creerLignes(donnees);
+	     ArrayList <Object> objetTypes = creerObjetTypes(donnees);
+	     TableModelGen model = new TableModelGen(nomColonnes,lignes, objetTypes);
+	     return model;
+	    }
 
     // Méthode appelée par la méthode creerTableModel pour récupérer les noms des colonnes
-    private static ArrayList <String> creerNomColonnes(ResultSet donnees)
-                throws SQLException
-    {ResultSetMetaData meta = donnees.getMetaData();
-     ArrayList <String> nomColonnes = new ArrayList <String>();
-
-     for (int i = 1; i <= meta.getColumnCount();i++)
-       { nomColonnes.add(meta.getColumnName(i));}
-
-     return nomColonnes;
-    }
+    private static ArrayList <String> creerNomColonnes(ResultSet donnees) throws SQLException {
+    	ResultSetMetaData meta = donnees.getMetaData();
+	    ArrayList <String> nomColonnes = new ArrayList <String>();
+	
+	    for (int i = 1; i <= meta.getColumnCount();i++)
+	      { nomColonnes.add(meta.getColumnName(i));}
+	
+	    return nomColonnes;
+	    }
 
     // Méthode appelée par la méthode creerTableModel pour récupérer les lignes des données
     private static ArrayList <Object> creerLignes(ResultSet donnees)
@@ -69,7 +66,7 @@ public class AccessBDGen
      String stringLu;
      int entierLu;
      double doubleLu;
-     float floatLu;
+     float floatLu; 
      boolean booleenLu;
      java.util.Date dateLue;
 

@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
+
 public class Fenetre extends JFrame {
 	
 	private Container cont;
@@ -12,10 +13,13 @@ public class Fenetre extends JFrame {
 	private JMenu menuApplication, menuBaseDeDonnée, menuAide, menuAccueil; 
 	private JMenuItem menuQuitter, menuNouvelleInstallation, menuSupprimerUneInstallation, menuLectureTable, menuCommentaire, menuPropos; 
 	//private JLabel labelTitre;
+	private NouvelleInstallation nouvelleInstallation = new NouvelleInstallation();
 	
 	public Fenetre() {
 	super("Examen ");
-    setBounds(500,200,400,450);
+    setBounds(500,200,800,600);
+    setResizable(false);
+
     
     cont = getContentPane();
     menuBarre = new JMenuBar(); 
@@ -82,16 +86,18 @@ public class Fenetre extends JFrame {
 	
 	private class MenuActionQuitter implements ActionListener  { 
 		public void actionPerformed(ActionEvent e)  {
-		System.exit(0);} 
+			System.exit(0);} 
 		}
 	
 	private class MenuActionNouvelleInstallation implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
-			/*panneauInfos.setVisible(false);  
-			cont.add(panneauInscription);
+			//panneauInfos.setVisible(false);  
+			cont.add(nouvelleInstallation);
+			nouvelleInstallation.setVisible(true); 
 			cont.repaint();
-			panneauInscription.setVisible(true); 
-			*/}}
+			cont.revalidate(); //Permet de rafficher la fenêtre
+			System.out.println("Nouvelle Installation");
+			}}
 	
 	private class MenuActionSupprimerInstallation implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
