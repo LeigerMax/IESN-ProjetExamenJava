@@ -82,21 +82,21 @@ public class NouvelleInstallation extends JPanel {
 		
 		
 		String[ ] contenuSoftware = {" "}; //mettre les softwares
-		comboxSoftware = new JComboBox(contenuSoftware);
-		comboxSoftware.setSelectedItem("");
-		comboxSoftware.setMaximumRowCount(3); 
 		labelSoftware = new JLabel("SoftWare : "); 
 		labelSoftware.setHorizontalAlignment(SwingConstants.RIGHT);
 		this.add(labelSoftware); 
-		this.add(comboxSoftware); 	
+		comboxSoftware = new JComboBox(contenuSoftware);
+		comboxSoftware.setSelectedItem("");
+		comboxSoftware.setMaximumRowCount(3); 
+		this.add(comboxSoftware ); 
 		
 		String[ ] contenuOS = {" "}; //mettre les OS
-		comboxOS = new JComboBox(contenuOS);
-		comboxOS.setSelectedItem("");
-		comboxOS.setMaximumRowCount(3); 
 		labelOS = new JLabel("OS : "); 
 		labelOS.setHorizontalAlignment(SwingConstants.RIGHT);
 		this.add(labelOS); 
+		comboxOS = new JComboBox(contenuOS);
+		comboxOS.setSelectedItem("");
+		comboxOS.setMaximumRowCount(3); 
 		this.add(comboxOS); 	
 		
 		
