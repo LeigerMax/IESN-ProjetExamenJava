@@ -8,26 +8,32 @@ import javax.swing.*;
 public class APropos extends JFrame {
 
 	private Container cont;
-	private JLabel labelTexte1,labelTexte2,labelTexte3;
+	private JLabel labelTexte1,labelTexte2,labelTexte3,labelTexte4;
 	private JButton boutonRetour;
 	
 	
 	public APropos() {
         super("A propos");
-        setBounds(500,200,350,450);
+        setBounds(500,200,400,200);
         cont = getContentPane();
         
-        labelTexte1 = new JLabel("Programme créer en Java sur Eclipse"); 
-        labelTexte1.setHorizontalAlignment(SwingConstants.RIGHT); 
-        cont.add(labelTexte1);
+		labelTexte1 = new JLabel("Programme créer en Java sur Eclipse");
+		labelTexte1.setBounds(80, 20, 255, 45);
+		this.add(labelTexte1);
+        
         
         labelTexte2 = new JLabel("Fait par Maxime & Paul "); 
-        labelTexte2.setHorizontalAlignment(SwingConstants.RIGHT); 
+        labelTexte2.setBounds(80, 40, 255, 45);
         cont.add(labelTexte2);
         
         labelTexte3 = new JLabel("Pour le cours Développement orienté objet avancé "); 
-        labelTexte3.setHorizontalAlignment(SwingConstants.RIGHT); 
+        labelTexte3.setBounds(80, 60, 300, 45);
         cont.add(labelTexte3);
+        
+        labelTexte4 = new JLabel("  "); 
+        labelTexte4.setBounds(80, 60, 255, 45);
+        cont.add(labelTexte4);
+
 
         
         boutonRetour = new JButton("Retour au menu principal");     
