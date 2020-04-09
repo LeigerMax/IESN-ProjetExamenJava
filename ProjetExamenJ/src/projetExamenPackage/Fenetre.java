@@ -14,12 +14,12 @@ public class Fenetre extends JFrame {
 	private JMenuItem menuQuitter, menuNouvelleInstallation, menuSupprimerUneInstallation, menuLectureTable, menuCommentaire, menuPropos,menuAccueil; 
 	private JLabel labelTitre;
 	private NouvelleInstallation nouvelleInstallation = new NouvelleInstallation();
-	private Accueil accueil = new Accueil();
+	private Accueil accueil = new Accueil(null);
 	
 	public Fenetre() {
 	super("Examen ");
     setBounds(500,200,800,600);
-    setResizable(false);
+    //setResizable(false);
 
     labelTitre = new JLabel("Bienvenue sur le programme d'installation  "); 
 	labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,16));

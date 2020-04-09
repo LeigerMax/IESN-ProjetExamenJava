@@ -9,11 +9,12 @@ import javax.swing.*;
 
 public class Accueil extends JPanel {
 	private JLabel labelTitre;
-	private JButton boutonNouvelleInstallation, boutonLecture, boutonSuppression;   
+	private JButton boutonNouvelleInstallation, boutonLecture, boutonSuppression;  
 
 	
-	public Accueil() {
+	public Accueil(JFrame test1) {
 		this.setLayout(null);
+		
 		
 		labelTitre = new JLabel("Accueil  "); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
@@ -39,14 +40,13 @@ public class Accueil extends JPanel {
 		this.add(boutonSuppression);
 		boutonSuppression.setBounds(250,240,255,50); 
 		
-		
+
 		
 	}
 	
 	
 	private class AccueilActionNouvelleInstallation implements ActionListener {
-		public void  actionPerformed(ActionEvent e)  {
-			
+		public void  actionPerformed(ActionEvent e)  {;
 			System.out.println("Nouvelle Installation");
 			}}
 

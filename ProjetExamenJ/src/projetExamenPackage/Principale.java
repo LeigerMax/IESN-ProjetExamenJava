@@ -1,8 +1,10 @@
 package projetExamenPackage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.*;
+
+
+
 import projetExamenPackage.AccessBDGen; 
 
 
@@ -13,8 +15,15 @@ public class Principale {
 		
 		  
 		try {
+			ResultSet résultats = null;
+			String requete = "SELECT * FROM installation";
 			Connection connection = AccessBDGen.connecter("DbInstallations","root", "Tigrou007");
 			System.out.println("Connexion réussi !"); // Etablir la connexion ("le câble qui relie le programme Java à la BD")  
+			
+			 
+			Statement stmt = connection.createStatement();
+			résultats = stmt.executeQuery(requete);
+			System.out.println(résultats);
 			
 			
 			String sqlInstruction = "insert into FamilleSoftware (IdFamSoft, Libelle)values (?,?)"; 
@@ -25,7 +34,7 @@ public class Principale {
 			System.out.println("Nombre de lignes modifiées: " + nbUpdatedLines); // Récupérer le nombre de lignes modifiées et l'afficher		
 			
 
-		
+	            
 		}
 			catch (SQLException e) {
 			System.out.println(e.getMessage()); }

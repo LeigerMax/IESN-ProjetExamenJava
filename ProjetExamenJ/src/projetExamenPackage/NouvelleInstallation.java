@@ -164,29 +164,29 @@ public class NouvelleInstallation extends JPanel {
 	}
 	
 	
-	private class ActionValider implements ActionListener { 
+	/*private class ActionValider implements ActionListener { 
 		public void actionPerformed (ActionEvent e) {
-			/*
-			try {
+			
+			try { 
 				Connection connection = AccessBDGen.connecter("DbInstallations","root", "Tigrou007");
 				System.out.println("Connexion réussi !");
+				LigneInstallation ligneInstallation = AccessBDGen.creerLignes();
+				
+				String sqlInstruction = "insert into installation (IdFamSoft, Libelle)values (?,?)"; 
+				PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); // Créer le PreparedStatement à partir de cette instruction SQL ("chariotsur câble")
+				myPrepStat.setInt(1,202); // remplacer les ? par valeurs introduites par user (pour éviter lesinjections SQL) 
+				myPrepStat.setString(2,"Ma famille Software "); // remplacer les ? par valeurs introduites par user (pour éviter lesinjections SQL) 
+				int nbUpdatedLines = myPrepStat.executeUpdate(); // Exécuter ("envoyer le chariot à la BD et demander d'exécuter l'instruction") 
+				System.out.println("Nombre de lignes modifiées: " + nbUpdatedLines); // Récupérer le nombre de lignes modifiées et l'afficher		
 				
 				
-				String sqlInstruction = "insert into FamilleSoftware (IdFamSoft, Libelle)values (?,?)"; 
-				PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); 
-				myPrepStat.setInt(1,id); 
-				myPrepStat.setString(2,nomFamille);  
-				int nbUpdatedLines = myPrepStat.executeUpdate();
-				System.out.println("Nombre de lignes modifiées: " + nbUpdatedLines); 
-				
-
 			
 			}
 				catch (SQLException eValider) {
 				System.out.println(eValider.getMessage()); }
-			*/
-		
-		}} 
+			
+	
+		}} */
 	
 	private class MonGestionnaireItemRadioValidation implements ItemListener { 
 		 public void itemStateChanged( ItemEvent e) { 
