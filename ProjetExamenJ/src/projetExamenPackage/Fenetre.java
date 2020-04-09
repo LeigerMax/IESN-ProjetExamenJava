@@ -77,7 +77,6 @@ public class Fenetre extends JFrame {
 	menuPropos.addActionListener(Propos); 
 	
 	
-	
     setVisible(true);
 	}
 	
