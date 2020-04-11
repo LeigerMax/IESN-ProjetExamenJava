@@ -11,10 +11,10 @@ import projetExamenPackage.AccessBDGen;
 public class Principale {
 
 	public static void main(String[] args) {
-		Fenetre f = new Fenetre();
+		Accueil fenetreAccueil = new Accueil();
 		
 		  
-		try {
+		/*try {
 			ResultSet résultats = null;
 			String requete = "SELECT * FROM installation";
 			Connection connection = AccessBDGen.connecter("DbInstallations","root", "Tigrou007");
@@ -38,6 +38,6 @@ public class Principale {
 		}
 			catch (SQLException e) {
 			System.out.println(e.getMessage()); }
-	
+	*/
 	}
 }
