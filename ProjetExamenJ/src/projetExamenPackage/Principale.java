@@ -11,6 +11,7 @@ import projetExamenPackage.AccessBDGen;
 public class Principale {
 
 	public static void main(String[] args) {
+		
 		Accueil fenetreAccueil = new Accueil();
 		
 		  

@@ -8,11 +8,14 @@ import javax.swing.*;
 
 
 public class Login extends JPanel {
+	
 	private JLabel labelTitre, labelDemandeConnexion, labelLogin, labelPassword;
 	private JButton boutonLogin;  
 	private JTextField zoneTextelogin;
 	private JPasswordField zoneTextePassword;
+	private Connection connection;
 	private Accueil accueil;
+	private Login parent;
 	
 	public Login(Accueil accueil) {
 		this.setLayout(null);
@@ -50,21 +53,27 @@ public class Login extends JPanel {
 		boutonLogin.addActionListener(login);
 		
 		this.accueil=accueil;
+		parent=this;
+		
 		setVisible(true);
-}
+		
+	}
 	
 	public class ActionBoutonLogin implements ActionListener{
 		public void actionPerformed( ActionEvent a){
 			if(a.getSource()==boutonLogin) {
 				try {
-					Connection connection = AccessBDGen.connecter("DbInstallations", zoneTextelogin.getText(), zoneTextePassword.getText());
-					Fenetre fenetrePrincipal = new Fenetre();
+					connection = AccessBDGen.connecter("DbInstallations", zoneTextelogin.getText(), zoneTextePassword.getText());
+					Fenetre fenetrePrincipal = new Fenetre(parent);
 					accueil.dispose();
 				}
 				catch(SQLException e) {
 					JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		}	
+		}
+	}
+	public Connection getConnect() {
+		return connection;
 	}
 }
