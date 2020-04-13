@@ -3,7 +3,6 @@ package projetExamenPackage;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-
 import javax.swing.*;
 import com.mysql.cj.xdevapi.Statement;
 
@@ -16,10 +15,10 @@ public class NouvelleInstallation extends JPanel {
 	private JRadioButton boutonAPrevoir, boutonTerminee,boutonEnCours; 
 	private ButtonGroup groupeBoutonValidation; 
 	private JPanel  panneauTitre, panneauFormulaire ,panneauBoutonValider,  panneauBoutons ; 
-	private JButton boutonRetour, boutonValidation, boutonR√©initialiser;   
+	private JButton boutonRetour, boutonValidation, boutonRÈinitialiser;   
 	
 	
-	public NouvelleInstallation() {
+	public NouvelleInstallation(Connection connection) {
 		this.setLayout(new FlowLayout()); 
 		
 		 
@@ -59,7 +58,7 @@ public class NouvelleInstallation extends JPanel {
 		this.add(zoneTexteCommentaires); 
 		
 		
-		labelDureeInstallation = new JLabel("Dur√©e Installation  : "); 
+		labelDureeInstallation = new JLabel("DurÈe Installation  : "); 
 		labelDureeInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		this.add(labelDureeInstallation); 
 		zoneTexteDureeInstallation = new JTextField(30); 
@@ -102,7 +101,7 @@ public class NouvelleInstallation extends JPanel {
 		
 		boutonAPrevoir = new JRadioButton("A prevoir",true); 
 		this.add(boutonAPrevoir); 
-		boutonTerminee = new JRadioButton("Termin√©e ",false); 
+		boutonTerminee = new JRadioButton("TerminÈe ",false); 
 		this.add(boutonTerminee); 
 		boutonEnCours = new JRadioButton("En cours",false); 
 		this.add(boutonEnCours);
@@ -157,11 +156,11 @@ public class NouvelleInstallation extends JPanel {
 		boutonValidation = new JButton(" Validation ");
 		ActionValider actionValider = new ActionValider();
 		boutonValidation.addActionListener(actionValider);
-		boutonR√©initialiser = new JButton(" R√©initialiser "); 
+		boutonRÈinitialiser = new JButton(" RÈinitialiser "); 
 		panneauBoutons = new JPanel( );     
 		panneauBoutons.add(boutonRetour); 
 		panneauBoutons.add(boutonValidation);    
-		panneauBoutons.add(boutonR√©initialiser);	
+		panneauBoutons.add(boutonRÈinitialiser);	
 		this.add(panneauBoutons,BorderLayout.SOUTH);
 	}
 	
@@ -172,16 +171,16 @@ public class NouvelleInstallation extends JPanel {
 			try { 
 				zoneTexteTypeInstallation.getText();
 				Connection connection = AccessBDGen.connecter("DbInstallations","root", "Tigrou007");
-				System.out.println("Connexion r√©ussi !");
+				System.out.println("Connexion rÈussi !");
 				System.out.println(zoneTexteTypeInstallation.getText());
 				//LigneInstallation ligneInstallation = AccessBDGen.creerLignes();
 				
 				String sqlInstruction = "insert into installation (IdFamSoft, Libelle)values (?,?)"; 
-				PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); // Cr√©er le PreparedStatement √† partir de cette instruction SQL ("chariotsur c√¢ble")
-				/*myPrepStat.setInt(1,202); // remplacer les ? par valeurs introduites par user (pour √©viter lesinjections SQL) 
-				myPrepStat.setString(2,"Ma famille Software "); // remplacer les ? par valeurs introduites par user (pour √©viter lesinjections SQL) 
-				int nbUpdatedLines = myPrepStat.executeUpdate(); // Ex√©cuter ("envoyer le chariot √† la BD et demander d'ex√©cuter l'instruction") 
-				System.out.println("Nombre de lignes modifi√©es: " + nbUpdatedLines); // R√©cup√©rer le nombre de lignes modifi√©es et l'afficher		
+				PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); // CrÈer le PreparedStatement ‡ partir de cette instruction SQL ("chariotsur c‚ble")
+				/*myPrepStat.setInt(1,202); // remplacer les ? par valeurs introduites par user (pour Èviter lesinjections SQL) 
+				myPrepStat.setString(2,"Ma famille Software "); // remplacer les ? par valeurs introduites par user (pour Èviter lesinjections SQL) 
+				int nbUpdatedLines = myPrepStat.executeUpdate(); // ExÈcuter ("envoyer le chariot ‡ la BD et demander d'exÈcuter l'instruction") 
+				System.out.println("Nombre de lignes modifiÈes: " + nbUpdatedLines); // RÈcupÈrer le nombre de lignes modifiÈes et l'afficher		
 				
 				*/
 			
@@ -190,7 +189,7 @@ public class NouvelleInstallation extends JPanel {
 				System.out.println(eValider.getMessage()); }
 			
 	
-		}} */
+		}} 
 	
 	private class MonGestionnaireItemRadioValidation implements ItemListener { 
 		 public void itemStateChanged( ItemEvent e) { 

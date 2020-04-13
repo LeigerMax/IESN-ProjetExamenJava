@@ -14,7 +14,7 @@ public class Fenetre extends JFrame {
 	private Container cont;
 	private JLabel message;
 	private JMenuBar menuBarre;
-	private JMenu menuApplication, menuBaseDeDonnÃ©e, menuAide; 
+	private JMenu menuApplication, menuBaseDeDonnée, menuAide; 
 	private JMenuItem menuQuitter, menuNouvelleInstallation, menuSupprimerUneInstallation, menuLectureTable, menuCommentaire, menuPropos,menuAccueil; 
 
 	
@@ -32,22 +32,22 @@ public class Fenetre extends JFrame {
 		//JMenu
 		menuApplication = new JMenu("Application");
 		menuBarre.add(menuApplication);
-		menuBaseDeDonnÃ©e = new JMenu("Base de donnÃ©e");
-		menuBarre.add(menuBaseDeDonnÃ©e);
+		menuBaseDeDonnée = new JMenu("Base de donnée");
+		menuBarre.add(menuBaseDeDonnée);
 		menuAide = new JMenu("Aide");
 		menuBarre.add(menuAide);
 		
 		//Message de bienvenue
-		message = new JLabel("Bienvenue dans l'application rÃ©alisÃ©e pour le cour de Java 2");
+		message = new JLabel("Bienvenue dans l'application réalisée pour le cour de Java 2");
 		message.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
 		message.setHorizontalAlignment(SwingConstants.CENTER);
 		add(message);
 		
 		//JMenuItem
-		menuAccueil = new JMenuItem("DÃ©connexion");
+		menuAccueil = new JMenuItem("Déconnexion");
 		menuAccueil.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,InputEvent.CTRL_MASK));
 		menuApplication.add(menuAccueil);
-		menuActionDÃ©connexion accueil = new menuActionDÃ©connexion();    
+		menuActionDéconnexion accueil = new menuActionDéconnexion();    
 		menuAccueil.addActionListener(accueil);
 		
 		menuQuitter = new JMenuItem("Sortie");
@@ -57,17 +57,17 @@ public class Fenetre extends JFrame {
 		menuQuitter.addActionListener(Exit);
 		
 		menuNouvelleInstallation = new JMenuItem("Nouvelle Installation"); 
-		menuBaseDeDonnÃ©e.add(menuNouvelleInstallation);
+		menuBaseDeDonnée.add(menuNouvelleInstallation);
 		MenuActionNouvelleInstallation NouvelleInstallation = new MenuActionNouvelleInstallation();    
 		menuNouvelleInstallation.addActionListener(NouvelleInstallation);
 		
 		menuLectureTable = new JMenuItem("Lecture d'une table"); 
-		menuBaseDeDonnÃ©e.add(menuLectureTable);
+		menuBaseDeDonnée.add(menuLectureTable);
 		MenuActionLectureInstallation LectureInstallation = new MenuActionLectureInstallation();    
 		menuLectureTable.addActionListener(LectureInstallation);
 		
 		menuSupprimerUneInstallation = new JMenuItem("Supprimer Installation"); 
-		menuBaseDeDonnÃ©e.add(menuSupprimerUneInstallation);
+		menuBaseDeDonnée.add(menuSupprimerUneInstallation);
 		MenuActionSupprimerInstallation SupprimerInstallation = new MenuActionSupprimerInstallation();    
 		menuSupprimerUneInstallation.addActionListener(SupprimerInstallation);
 		
@@ -86,23 +86,23 @@ public class Fenetre extends JFrame {
 	    setVisible(true);
 	    
 		try {
-		ResultSet rÃ©sultats = null;
+		ResultSet résultats = null;
 		String requete = "SELECT * FROM installation";
 		Connection connection = AccessBDGen.connecter("DbInstallations","root", "Tigrou007");
-		System.out.println("Connexion rÃ©ussi !"); // Etablir la connexion ("le cÃ¢ble qui relie le programme Java Ã  la BD")  
+		System.out.println("Connexion réussi !"); // Etablir la connexion ("le câble qui relie le programme Java à la BD")  
 		
 		 
 		Statement stmt = connection.createStatement();
-		rÃ©sultats = stmt.executeQuery(requete);
-		System.out.println(rÃ©sultats);
+		résultats = stmt.executeQuery(requete);
+		System.out.println(résultats);
 		
 		
 		String sqlInstruction = "insert into FamilleSoftware (IdFamSoft, Libelle)values (?,?)"; 
-		PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); // CrÃ©er le PreparedStatement Ã  partir de cette instruction SQL ("chariotsur cÃ¢ble")
-		myPrepStat.setInt(1,202); // remplacer les ? par valeurs introduites par user (pour Ã©viter lesinjections SQL) 
-		myPrepStat.setString(2,"Ma famille Software "); // remplacer les ? par valeurs introduites par user (pour Ã©viter lesinjections SQL) 
-		int nbUpdatedLines = myPrepStat.executeUpdate(); // ExÃ©cuter ("envoyer le chariot Ã  la BD et demander d'exÃ©cuter l'instruction") 
-		System.out.println("Nombre de lignes modifiÃ©es: " + nbUpdatedLines); // RÃ©cupÃ©rer le nombre de lignes modifiÃ©es et l'afficher		
+		PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); // Créer le PreparedStatement à partir de cette instruction SQL ("chariotsur câble")
+		myPrepStat.setInt(1,202); // remplacer les ? par valeurs introduites par user (pour éviter lesinjections SQL) 
+		myPrepStat.setString(2,"Ma famille Software "); // remplacer les ? par valeurs introduites par user (pour éviter lesinjections SQL) 
+		int nbUpdatedLines = myPrepStat.executeUpdate(); // Exécuter ("envoyer le chariot à la BD et demander d'exécuter l'instruction") 
+		System.out.println("Nombre de lignes modifiées: " + nbUpdatedLines); // Récupérer le nombre de lignes modifiées et l'afficher		
 		
 
             
@@ -112,10 +112,10 @@ public class Fenetre extends JFrame {
 	}
 	
 	
-	private class menuActionDÃ©connexion implements ActionListener {
+	private class menuActionDéconnexion implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
 			dispose();
-			Accueil fenetreDÃ©connexion = new Accueil();
+			Accueil fenetreDéconnexion = new Accueil();
 		}} 
 	
 	
@@ -144,8 +144,8 @@ public class Fenetre extends JFrame {
 			add(nouvelleInstallation);
 			nouvelleInstallation.setVisible(true); 
 			repaint();
-			revalidate(); //Permet de rafficher la fenÃªtre
-			System.out.println("Nouvelle Installation");*/
+			revalidate(); //Permet de rafficher la fenêtre
+			System.out.println("Nouvelle Installation");
 		}}
 	
 	
@@ -162,7 +162,7 @@ public class Fenetre extends JFrame {
 			add(lecture);
 			lecture.setVisible(true); 
 			repaint();
-			revalidate(); //Permet de rafficher la fenÃªtre
+			revalidate(); //Permet de rafficher la fenêtre
 			System.out.println("Lecture de la table");
 			/*cont.removeAll();
 			cont.add(lecture);
