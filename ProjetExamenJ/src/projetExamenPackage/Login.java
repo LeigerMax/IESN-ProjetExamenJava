@@ -63,7 +63,7 @@ public class Login extends JPanel {
 		public void actionPerformed( ActionEvent a){
 			if(a.getSource()==boutonLogin) {
 				try {
-					connection = AccessBDGen.connecter("DbInstallations", zoneTextelogin.getText(), zoneTextePassword.getText());
+					connection = AccessBDGen.connecter("DbInstallations", "root","Tigrou007");
 					Fenetre fenetrePrincipal = new Fenetre(parent);
 					accueil.dispose();
 				}

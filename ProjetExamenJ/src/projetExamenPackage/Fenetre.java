@@ -5,8 +5,6 @@ import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 
-
-
 public class Fenetre extends JFrame {
 	
 	private Connection connection;
@@ -85,56 +83,33 @@ public class Fenetre extends JFrame {
 		
 	    setVisible(true);
 	    
-		try {
-		ResultSet résultats = null;
-		String requete = "SELECT * FROM installation";
-		Connection connection = AccessBDGen.connecter("DbInstallations","root", "Tigrou007");
-		System.out.println("Connexion réussi !"); // Etablir la connexion ("le câble qui relie le programme Java à la BD")  
-		
-		 
-		Statement stmt = connection.createStatement();
-		résultats = stmt.executeQuery(requete);
-		System.out.println(résultats);
-		
-		
-		String sqlInstruction = "insert into FamilleSoftware (IdFamSoft, Libelle)values (?,?)"; 
-		PreparedStatement myPrepStat = connection.prepareStatement(sqlInstruction); // Créer le PreparedStatement à partir de cette instruction SQL ("chariotsur câble")
-		myPrepStat.setInt(1,202); // remplacer les ? par valeurs introduites par user (pour éviter lesinjections SQL) 
-		myPrepStat.setString(2,"Ma famille Software "); // remplacer les ? par valeurs introduites par user (pour éviter lesinjections SQL) 
-		int nbUpdatedLines = myPrepStat.executeUpdate(); // Exécuter ("envoyer le chariot à la BD et demander d'exécuter l'instruction") 
-		System.out.println("Nombre de lignes modifiées: " + nbUpdatedLines); // Récupérer le nombre de lignes modifiées et l'afficher		
-		
-
-            
-	}
-		catch (SQLException e) {
-		System.out.println(e.getMessage()); }
 	}
 	
 	
 	private class menuActionDéconnexion implements ActionListener {
-		public void  actionPerformed(ActionEvent e)  {
+		public void  actionPerformed(ActionEvent exit)  {
 			dispose();
-			Accueil fenetreDéconnexion = new Accueil();
+			try {
+				connection.close();
+				System.out.println("Déco");
+				Accueil fenetreDéconnexion = new Accueil();
+			}
+			catch(SQLException exit1) { 
+				System.out.println(exit1.getMessage());
+			}
 		}} 
 	
 	
 	private class MenuActionQuitter implements ActionListener  { 
 		public void actionPerformed(ActionEvent e)  {
+			try {
+				connection.close();
+			}
+			catch(SQLException exit1) { }
 			System.exit(0);
 		}}
 	
-	
-	private class menuActionCommentaire implements ActionListener {
-		public void  actionPerformed(ActionEvent e)  {
-			
-		}} 
-	
-	
-	private class menuActionPropos implements ActionListener {
-		public void  actionPerformed(ActionEvent e)  {
-			APropos propos = new APropos();
-		}} 
+
 	
 	
 	private class MenuActionNouvelleInstallation implements ActionListener {
@@ -158,21 +133,42 @@ public class Fenetre extends JFrame {
 	
 	private class MenuActionLectureInstallation implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
-			remove(message);
+			getContentPane().removeAll();
+			AfficherLesTables afficherLesTables = new AfficherLesTables (connection,Fenetre.this);
+			add(afficherLesTables);
+			afficherLesTables.repaint();
+			Fenetre.this.setVisible(true);
+			/*cont.remove(message);
 			getContentPane().removeAll();
 			AfficherLesTables afficherLesTables = new AfficherLesTables(connection);
 			add(afficherLesTables);
 			afficherLesTables.setVisible(true); 
 			repaint();
-			revalidate(); //Permet de rafficher la fenêtre
+			revalidate(); //Permet de rafficher la fenêtre*/
 			System.out.println("Lecture de la table");
-			/*cont.removeAll();
-			cont.add(lecture);
-			cont.repaint();
-			Fenetre.this.setVisible(true);*/
+
 		}}
+	
+	private class menuActionCommentaire implements ActionListener {
+		public void  actionPerformed(ActionEvent e)  {
+			
+		}} 
+	
+	
+	private class menuActionPropos implements ActionListener {
+		public void  actionPerformed(ActionEvent e)  {
+			APropos propos = new APropos();
+		}} 
 
 	public Connection getConnect() {
 		return connection;
+	}
+	
+	public Fenetre getWin() {
+		return this;
+	}
+	
+	public Container getCont(){
+		return cont;
 	}
 }
