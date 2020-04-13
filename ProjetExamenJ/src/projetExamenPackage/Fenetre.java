@@ -139,12 +139,12 @@ public class Fenetre extends JFrame {
 	
 	private class MenuActionNouvelleInstallation implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  { 
-			/*
+			remove(message);
 			NouvelleInstallation nouvelleInstallation = new NouvelleInstallation(connection);
-			cont.add(nouvelleInstallation);
+			add(nouvelleInstallation);
 			nouvelleInstallation.setVisible(true); 
-			cont.repaint();
-			cont.revalidate(); //Permet de rafficher la fenêtre
+			repaint();
+			revalidate(); //Permet de rafficher la fenêtre
 			System.out.println("Nouvelle Installation");*/
 		}}
 	
@@ -157,6 +157,7 @@ public class Fenetre extends JFrame {
 	
 	private class MenuActionLectureInstallation implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
+			getContentPane().removeAll();
 			Lecture lecture = new Lecture(connection);
 			add(lecture);
 			lecture.setVisible(true); 
