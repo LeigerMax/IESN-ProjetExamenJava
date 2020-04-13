@@ -160,9 +160,9 @@ public class Fenetre extends JFrame {
 		public void  actionPerformed(ActionEvent e)  {
 			remove(message);
 			getContentPane().removeAll();
-			Lecture lecture = new Lecture(connection);
-			add(lecture);
-			lecture.setVisible(true); 
+			AfficherLesTables afficherLesTables = new AfficherLesTables(connection);
+			add(afficherLesTables);
+			afficherLesTables.setVisible(true); 
 			repaint();
 			revalidate(); //Permet de rafficher la fenêtre
 			System.out.println("Lecture de la table");
