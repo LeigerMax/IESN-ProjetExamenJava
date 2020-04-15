@@ -18,7 +18,7 @@ public class NouvelleInstallation extends JPanel {
 	private JButton boutonRetour, boutonValidation, boutonRéinitialiser;   
 	
 	
-	public NouvelleInstallation(Connection connection) {
+	public NouvelleInstallation(Connection connection, Fenetre fenetre) {
 		this.setLayout(new FlowLayout()); 
 		
 		 

@@ -14,7 +14,7 @@ public class Fenetre extends JFrame {
 	private JLabel message;
 	private JMenuBar menuBarre;
 	private JMenu menuApplication, menuBaseDeDonnée, menuAide; 
-	private JMenuItem menuQuitter, menuNouvelleInstallation, menuSupprimerUneInstallation, menuLectureTable, menuCommentaire, menuPropos,menuAccueil; 
+	private JMenuItem menuQuitter, menuNouvelleInstallation, menuSupprimerUneInstallation, menuLectureTable, menuSoftwaresAcquisDate, menuSoftwareProfesseur, menuCommentaire, menuPropos,menuAccueil; 
 
 	
 	public Fenetre(Login parent) {
@@ -64,6 +64,16 @@ public class Fenetre extends JFrame {
 		menuBaseDeDonnée.add(menuLectureTable);
 		MenuActionLectureInstallation LectureInstallation = new MenuActionLectureInstallation();    
 		menuLectureTable.addActionListener(LectureInstallation);
+		
+		menuSoftwaresAcquisDate = new JMenuItem("Softwares Acquis Date"); 
+		menuBaseDeDonnée.add(menuSoftwaresAcquisDate);
+		MenuActionSoftwaresAcquisDate SoftwaresAcquisDate = new MenuActionSoftwaresAcquisDate();    
+		menuSoftwaresAcquisDate.addActionListener(SoftwaresAcquisDate);
+		
+		menuSoftwareProfesseur = new JMenuItem("Softwares Professeur"); 
+		menuBaseDeDonnée.add(menuSoftwareProfesseur);
+		MenuActionSoftwareProfesseur SoftwareProfesseur = new MenuActionSoftwareProfesseur();    
+		menuSoftwareProfesseur.addActionListener(SoftwareProfesseur);
 		
 		menuSupprimerUneInstallation = new JMenuItem("Supprimer Installation"); 
 		menuBaseDeDonnée.add(menuSupprimerUneInstallation);
@@ -115,14 +125,13 @@ public class Fenetre extends JFrame {
 	
 	private class MenuActionNouvelleInstallation implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  { 
-			remove(message);
 			getContentPane().removeAll();
-			NouvelleInstallation nouvelleInstallation = new NouvelleInstallation(connection);
+			NouvelleInstallation nouvelleInstallation = new NouvelleInstallation(connection,Fenetre.this);
 			add(nouvelleInstallation);
-			nouvelleInstallation.setVisible(true); 
-			repaint();
-			revalidate(); //Permet de rafficher la fenêtre
+			nouvelleInstallation.repaint();
+			Fenetre.this.setVisible(true);
 			System.out.println("Nouvelle Installation");
+		
 		}}
 	
 	
@@ -139,15 +148,29 @@ public class Fenetre extends JFrame {
 			add(afficherLesTables);
 			afficherLesTables.repaint();
 			Fenetre.this.setVisible(true);
-			/*cont.remove(message);
-			getContentPane().removeAll();
-			AfficherLesTables afficherLesTables = new AfficherLesTables(connection);
-			add(afficherLesTables);
-			afficherLesTables.setVisible(true); 
-			repaint();
-			revalidate(); //Permet de rafficher la fenêtre*/
 			System.out.println("Lecture de la table");
 
+		}}
+	
+	private class MenuActionSoftwaresAcquisDate implements ActionListener {
+		public void  actionPerformed(ActionEvent e)  {
+			getContentPane().removeAll();
+			SoftwaresAcquisDate softwaresAcquisDate = new SoftwaresAcquisDate(connection,Fenetre.this);
+			add(softwaresAcquisDate);
+			softwaresAcquisDate.repaint();
+			Fenetre.this.setVisible(true);
+			System.out.println("softwares Acquis Date");
+
+		}}
+	
+	private class MenuActionSoftwareProfesseur implements ActionListener {
+		public void  actionPerformed(ActionEvent e)  {
+			getContentPane().removeAll();
+			SoftwareProfesseur softwareProfesseur = new SoftwareProfesseur(connection,Fenetre.this);
+			add(softwareProfesseur);
+			softwareProfesseur.repaint();
+			Fenetre.this.setVisible(true);
+			System.out.println("softwares Prof");
 		}}
 	
 	private class menuActionCommentaire implements ActionListener {
