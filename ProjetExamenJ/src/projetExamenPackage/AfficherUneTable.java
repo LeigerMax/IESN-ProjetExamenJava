@@ -3,9 +3,9 @@ package projetExamenPackage;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
+import accessBD.*;
 
-import projetExamenPackage.AccessBDGen;
-import projetExamenPackage.TableModelGen;
+
 
 public class AfficherUneTable extends JPanel {
 	private static JTable table2;

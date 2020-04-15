@@ -1,13 +1,5 @@
 package projetExamenPackage;
 
-import java.sql.*;
-import java.util.*;
-
-
-
-import projetExamenPackage.AccessBDGen; 
-
-
 public class Principale {
 
 	public static void main(String[] args) {

@@ -4,7 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
-
+import accessBD.AccessBDGen; 
+import accessBD.TableModelGen; 
 
 
 
