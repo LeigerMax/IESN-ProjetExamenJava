@@ -13,9 +13,6 @@ public class AfficherLesTables extends JPanel{
 	private Fenetre parent;
 	private String SqlSelectFrom;
 	private JComboBox<String> comboxChoix;
-	private AfficherLesTables afficherLesTables;
-
-
 	
 	
 	AfficherLesTables(Connection connection, Fenetre fenetre) {
@@ -28,7 +25,7 @@ public class AfficherLesTables extends JPanel{
 		comboxChoix = new JComboBox<String>();
 		add(comboxChoix);
 		
-		boutonChoix = new JButton("afficher");
+		boutonChoix = new JButton("Afficher");
 		add(boutonChoix);
 		
 		RécupérerNomsTableau(connection);
@@ -66,8 +63,6 @@ public class AfficherLesTables extends JPanel{
 				add(comboxChoix,BorderLayout.NORTH);
 				add(boutonChoix,BorderLayout.NORTH);
 				add(afficherLaTable,BorderLayout.CENTER);
-				//repaint();
-				//setVisible(true);
 				validate();
 			}}
 

@@ -15,27 +15,14 @@ public class AfficherUneTable extends JPanel {
 			PreparedStatement prepStat = connection.prepareStatement(SqlSelectFrom);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
 		 	table2 = new JTable(table);
-		 	table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-		 	JScrollPane scroll = new JScrollPane (table2) ;
-		 	scroll.setPreferredSize(new Dimension(400, 200));
-		 	this.add(scroll);
+
+		 	JScrollPane defilant = new JScrollPane (table2) ;
+		 	defilant.setPreferredSize(new Dimension(600, 450));
+		 	this.add(defilant);
 			}
 		catch(SQLException e) {	}
 		
 		setVisible(true);
 		}
 	
-	
-	public static int getTable2 () {
-		int index=0;		
-		try {
-			index=(int)table2.getValueAt(table2.getSelectionModel().getMinSelectionIndex(), 0);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		return index;
-	}
 }
