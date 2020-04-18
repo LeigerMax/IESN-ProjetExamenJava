@@ -17,7 +17,7 @@ public class AfficherUneTable extends JPanel {
 		 	table2 = new JTable(table);
 
 		 	JScrollPane defilant = new JScrollPane (table2) ;
-		 	defilant.setPreferredSize(new Dimension(600, 450));
+		 	defilant.setPreferredSize(new Dimension(600, 400));
 		 	this.add(defilant);
 			}
 		catch(SQLException e) {	}

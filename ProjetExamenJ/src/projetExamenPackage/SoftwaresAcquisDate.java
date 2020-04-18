@@ -7,24 +7,33 @@ import accessBD.*;
 
 
 public class SoftwaresAcquisDate extends JPanel {
-	private JLabel labelTitre;
+	private JLabel labelTitre, labelDateDébut, labelDateFin;
 	private JButton boutonChoix;
 	private Fenetre parent;
 	private String SqlSelectFrom, stringDateDébut,stringDateFin;
 	private JComboBox<Integer> année, mois ,jour;
 	private JComboBox<Integer> annéeF, moisF ,jourF;
 
-
-
 	
 	public  SoftwaresAcquisDate(Connection connection, Fenetre fenetre) {
+		setLayout(null);
 		parent = fenetre;
-		System.out.println("Softwares acquis entre deux dates ");
+
 		labelTitre = new JLabel("Softwares acquis entre deux dates"); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
+		labelTitre.setBounds(220,10,450,30); 
 		add(labelTitre); 
 		
+		labelDateDébut = new JLabel("Date début : "); 
+		labelDateDébut.setBounds(100,50,100,40); 
+		add(labelDateDébut); 
+		
+		labelDateFin = new JLabel("Date Fin : "); 
+		labelDateFin.setBounds(360,50,100,40); 
+		add(labelDateFin); 
+		
 		boutonChoix = new JButton("Afficher");
+		boutonChoix.setBounds(600,50,80,30); 
 		add(boutonChoix);
 		
 
@@ -51,6 +60,14 @@ public class SoftwaresAcquisDate extends JPanel {
 			jour.addItem(jourI);
 			jourF.addItem(jourI);
 		}
+		
+		année.setBounds(175,50,65,30); 
+		mois.setBounds(240,50,45,30); 
+		jour.setBounds(285,50,45,30); 
+		annéeF.setBounds(425,50,65,30); 
+		moisF.setBounds(490,50,45,30); 
+		jourF.setBounds(535,50,45,30); 
+		
 		
 		add(année);
 		add(mois);
@@ -85,6 +102,7 @@ public class SoftwaresAcquisDate extends JPanel {
 			add(annéeF);
 			add(moisF);
 			add(jourF);
+			afficherLaTable.setBounds(100,100,600, 400); 
 			add(afficherLaTable,BorderLayout.CENTER);
 			validate();
 		}}
