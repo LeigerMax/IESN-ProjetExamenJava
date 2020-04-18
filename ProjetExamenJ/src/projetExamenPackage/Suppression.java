@@ -8,8 +8,8 @@ import accessBD.*;
 
 public class Suppression extends JPanel {
 	private JLabel labelTitre, labelFamilleSoft;
-	private JButton affInstall;
-	private JComboBox<String> installExist, familleSoft;
+	private JButton affInstall, supInstall;
+	private JComboBox<String> familleSoft;
 	private Fenetre parent;
 	private String SqlSelectFrom;
 	
@@ -24,34 +24,83 @@ public class Suppression extends JPanel {
 		
 		labelFamilleSoft = new JLabel("Famille de Software : ");
 		labelFamilleSoft.setHorizontalAlignment(SwingConstants.LEFT);
-		labelFamilleSoft.setBounds(150, 60, 300, 30);
+		labelFamilleSoft.setBounds(140, 60, 300, 30);
 		add(labelFamilleSoft);
-		String[ ] contSoft = {"Windows", "Linux", "Mac IOS"};
-		familleSoft = new JComboBox(contSoft);
-		familleSoft.setBounds(280, 60, 100, 30);
+		
+		familleSoft = new JComboBox();
+		familleSoft.setBounds(270, 60, 170, 30);
 		familleSoft.setSelectedItem("");
 		familleSoft.setMaximumRowCount(3);
 		add(familleSoft);
 		
 		affInstall = new JButton("AFFICHER"); 
-		affInstall.setBounds(400,60,100,30); 
+		affInstall.setBounds(460,60,100,30); 
 		ActionBoutonAfficher a = new ActionBoutonAfficher();
-		a.addActionListener();
+		affInstall.addActionListener(a);
+		add(affInstall);
+		
+		supInstall = new JButton("SUPPRIMER");
+		supInstall.setBounds(580, 60, 110, 30);
+		ActionSupprimer b = new ActionSupprimer();
+		supInstall.addActionListener(b);
 		add(supInstall);
+		
+		RécupérerNomsTableau(connect);
+
 
 		setVisible(true);
 	}
 	
-	public class ActionBoutonSupprimer implements ActionListener{
+	private void RécupérerNomsTableau(Connection connect) {
+		try {
+			PreparedStatement prepStat = connect.prepareStatement("SELECT libelle FROM familleSoftware;");
+			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
+			for(int i = 0; i <= table2.getRowCount()-1; i++) {
+				familleSoft.addItem((String) table2.getValueAt(i, 0));
+			}
+		}
+		catch(SQLException e) {
+			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	public class ActionBoutonAfficher implements ActionListener{
 
 		public void actionPerformed(ActionEvent a) {
 			
+			SqlSelectFrom = "SELECT * FROM "+(String)familleSoft.getSelectedItem()+";";
+			AfficherUneTable afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
+			
+			removeAll();
+			
+			add(labelTitre);
+			add(familleSoft);
+			add(affInstall);
+			add(supInstall);
+			afficherLaTable.setBounds(100, 100, 600, 400);
+			add(afficherLaTable);
+			validate();
 		}
+	}
+	
+	public class ActionBoutonSupprimer implements ActionListener{
 
-		public void addActionListener() {
+		public void actionPerformed(ActionEvent b) {
+			SqlSelectFrom = "DELETE * FROM" + (String)familleSoft.getSelectedItem()+";";
+			AfficherUneTable afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 			
+			removeAll();
 			
+			add(labelTitre);
+			add(familleSoft);
+			add(affInstall);
+			add(supInstall);
+			afficherLaTable.setBounds(100, 100, 600, 400);
+			add(afficherLaTable);
+			validate();
 		}
-		
+	}
+		}
 	}
 }
