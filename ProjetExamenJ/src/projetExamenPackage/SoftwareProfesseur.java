@@ -15,16 +15,21 @@ public class SoftwareProfesseur extends JPanel{
 	private JComboBox<String> comboxChoix;
 	
 	public  SoftwareProfesseur(Connection connection, Fenetre fenetre) {
+		setLayout(null);
 		parent = fenetre;
-		System.out.println("Softwares utilisés dans les sections ");
+
+		
 		labelTitre = new JLabel("Softwares utilisés dans les sections"); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
+		labelTitre.setBounds(220,10,450,30); 
 		add(labelTitre); 
 		
 		comboxChoix = new JComboBox<String>();
+		comboxChoix.setBounds(250,50,150,30); 
 		add(comboxChoix);
 		
 		boutonChoix = new JButton("Afficher");
+		boutonChoix.setBounds(400,50,80,30); 
 		add(boutonChoix);
 		
 		RécupérerNomsTableau(connection);
@@ -49,17 +54,17 @@ public class SoftwareProfesseur extends JPanel{
 	
 	private class ActionAfficher implements ActionListener{
 		public void actionPerformed( ActionEvent a){
-			SqlSelectFrom = "SELECT Nom FROM Software JOIN utilisationsoftware on Software.CodeSoftware = utilisationsoftware.CodeSoftware JOIN anneeetude ON utilisationsoftware.IdAnneeEtude = anneeetude.IdAnneeEtude JOIN section ON anneeetude.CodeSection = section.CodeSection JOIN professeur ON section.CodeSection = professeur.CodeSection WHERE professeur.NomPrenom LIKE '"+(String)comboxChoix.getSelectedItem()+"';";
-			System.out.println(SqlSelectFrom);
+			SqlSelectFrom = "SELECT DISTINCT  Nom FROM Software JOIN utilisationsoftware on Software.CodeSoftware = utilisationsoftware.CodeSoftware JOIN anneeetude ON utilisationsoftware.IdAnneeEtude = anneeetude.IdAnneeEtude JOIN section ON anneeetude.CodeSection = section.CodeSection JOIN professeur ON section.CodeSection = professeur.CodeSection WHERE professeur.NomPrenom LIKE '"+(String)comboxChoix.getSelectedItem()+"';";
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 
 			
 			removeAll();
 			
-			add(labelTitre,BorderLayout.NORTH);
-			add(comboxChoix,BorderLayout.NORTH);
-			add(boutonChoix,BorderLayout.NORTH);
-			add(afficherLaTable,BorderLayout.CENTER);
+			add(labelTitre);
+			add(comboxChoix);
+			add(boutonChoix);
+			afficherLaTable.setBounds(100,100,600, 400); 
+			add(afficherLaTable);
 			validate();
 		}}
 	
