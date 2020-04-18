@@ -87,6 +87,7 @@ public class Suppression extends JPanel {
 	public class ActionBoutonSupprimer implements ActionListener{
 
 		public void actionPerformed(ActionEvent b) {
+			//Pas correct
 			SqlSelectFrom = "DELETE * FROM" + (String)familleSoft.getSelectedItem()+";";
 			AfficherUneTable afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 			
