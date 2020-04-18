@@ -7,7 +7,7 @@ import javax.swing.*;
 import accessBD.*;
 
 public class Suppression extends JPanel {
-	private JLabel labelTitre, labelSelection;
+	private JLabel labelTitre, labelFamilleSoft;
 	private JButton supInstall;
 	private JComboBox<String> installExist, fammilleSoft;
 	private Fenetre parent;
