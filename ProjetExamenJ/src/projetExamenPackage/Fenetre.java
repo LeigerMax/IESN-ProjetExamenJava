@@ -130,7 +130,6 @@ public class Fenetre extends JFrame {
 			add(nouvelleInstallation);
 			nouvelleInstallation.repaint();
 			Fenetre.this.setVisible(true);
-			System.out.println("Nouvelle Installation");
 		
 		}}
 	
@@ -148,7 +147,6 @@ public class Fenetre extends JFrame {
 			add(afficherLesTables);
 			afficherLesTables.repaint();
 			Fenetre.this.setVisible(true);
-			System.out.println("Lecture de la table");
 
 		}}
 	
@@ -159,7 +157,6 @@ public class Fenetre extends JFrame {
 			add(softwaresAcquisDate);
 			softwaresAcquisDate.repaint();
 			Fenetre.this.setVisible(true);
-			System.out.println("softwares Acquis Date");
 
 		}}
 	
@@ -170,7 +167,6 @@ public class Fenetre extends JFrame {
 			add(softwareProfesseur);
 			softwareProfesseur.repaint();
 			Fenetre.this.setVisible(true);
-			System.out.println("softwares Prof");
 		}}
 	
 	private class menuActionCommentaire implements ActionListener {
