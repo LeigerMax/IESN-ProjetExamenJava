@@ -136,7 +136,11 @@ public class Fenetre extends JFrame {
 	
 	private class MenuActionSupprimerInstallation implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
-
+			getContentPane().removeAll();
+			Suppression suppression = new Suppression(connection,Fenetre.this);
+			add(suppression);
+			suppression.repaint();
+			Fenetre.this.setVisible(true);
 		}}
 	
 	
