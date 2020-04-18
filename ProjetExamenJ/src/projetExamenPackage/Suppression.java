@@ -24,11 +24,11 @@ public class Suppression extends JPanel {
 		
 		labelSelection = new JLabel("Sélectionnez la ligne à supprimer");
 		labelSelection.setFont(new java.awt.Font(Font.SERIF,Font.ITALIC,15));
-		labelSelection.setBounds(200, 60, 200, 30);
+		labelSelection.setBounds(250, 60, 300, 30);
 		add(labelSelection);
 		
 		supInstall = new JButton("Supprimer"); 
-		supInstall.setBounds(100,320,120,40); 
+		supInstall.setBounds(100,400,120,40); 
 		supInstall.setBackground(Color.LIGHT_GRAY);
 		ActionBoutonSupprimer sup = new ActionBoutonSupprimer();
 		sup.addActionListener();
