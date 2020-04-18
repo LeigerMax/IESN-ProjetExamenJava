@@ -17,16 +17,21 @@ public class AfficherLesTables extends JPanel{
 	
 	
 	AfficherLesTables(Connection connection, Fenetre fenetre) {
+		setLayout(null);
 		parent = fenetre;
-		System.out.println("Test lecture");
-		labelTitre = new JLabel("Lecture tableau"); 
+		
+		labelTitre = new JLabel("Afficher tableau "); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
+		labelTitre.setBounds(300,10,450,30); 
 		add(labelTitre); 
+
 		
 		comboxChoix = new JComboBox<String>();
+		comboxChoix.setBounds(270,50,150,30); 
 		add(comboxChoix);
 		
 		boutonChoix = new JButton("Afficher");
+		boutonChoix.setBounds(420,50,80,30); 
 		add(boutonChoix);
 		
 		RécupérerNomsTableau(connection);
@@ -35,6 +40,7 @@ public class AfficherLesTables extends JPanel{
 		ActionAfficher a = new ActionAfficher();
 		boutonChoix.addActionListener(a);
 		
+
 		
 		setVisible(true);
 	}
@@ -60,10 +66,11 @@ public class AfficherLesTables extends JPanel{
 				
 				removeAll();
 				
-				add(labelTitre,BorderLayout.NORTH);
-				add(comboxChoix,BorderLayout.NORTH);
-				add(boutonChoix,BorderLayout.NORTH);
-				add(afficherLaTable,BorderLayout.CENTER);
+				add(labelTitre);
+				add(comboxChoix);
+				add(boutonChoix);
+				afficherLaTable.setBounds(100,100,600, 400); 
+				add(afficherLaTable);
 				validate();
 			}}
 
