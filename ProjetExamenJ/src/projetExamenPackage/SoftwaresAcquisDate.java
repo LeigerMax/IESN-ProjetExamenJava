@@ -89,7 +89,6 @@ public class SoftwaresAcquisDate extends JPanel {
 			stringDateDébut = année.getSelectedItem()+"-"+(mois.getSelectedItem())+"-"+jour.getSelectedItem();
 			stringDateFin = annéeF.getSelectedItem()+"-"+(moisF.getSelectedItem())+"-"+jourF.getSelectedItem();
 			SqlSelectFrom = "SELECT * FROM software WHERE software.DateAcquisition BETWEEN '"+stringDateDébut+"' AND '"+stringDateFin+"';";
-			System.out.println(SqlSelectFrom);
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 
 			
