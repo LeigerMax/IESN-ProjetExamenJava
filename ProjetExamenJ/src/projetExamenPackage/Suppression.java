@@ -8,8 +8,8 @@ import accessBD.*;
 
 public class Suppression extends JPanel {
 	private JLabel labelTitre, labelFamilleSoft;
-	private JButton supInstall;
-	private JComboBox<String> installExist, fammilleSoft;
+	private JButton affInstall;
+	private JComboBox<String> installExist, familleSoft;
 	private Fenetre parent;
 	private String SqlSelectFrom;
 	
@@ -28,16 +28,15 @@ public class Suppression extends JPanel {
 		add(labelFamilleSoft);
 		String[ ] contSoft = {"Windows", "Linux", "Mac IOS"};
 		familleSoft = new JComboBox(contSoft);
-		familleSoft.setBounds(280, 60, 150, 30);
+		familleSoft.setBounds(280, 60, 100, 30);
 		familleSoft.setSelectedItem("");
 		familleSoft.setMaximumRowCount(3);
 		add(familleSoft);
 		
-		supInstall = new JButton("Supprimer"); 
-		supInstall.setBounds(100,400,120,40); 
-		supInstall.setBackground(Color.LIGHT_GRAY);
-		ActionBoutonSupprimer sup = new ActionBoutonSupprimer();
-		sup.addActionListener();
+		affInstall = new JButton("AFFICHER"); 
+		affInstall.setBounds(400,60,100,30); 
+		ActionBoutonAfficher a = new ActionBoutonAfficher();
+		a.addActionListener();
 		add(supInstall);
 
 		setVisible(true);
@@ -47,14 +46,6 @@ public class Suppression extends JPanel {
 
 		public void actionPerformed(ActionEvent a) {
 			
-			if(a.getSource() == supInstall) {
-				/*try {
-					
-				}
-				catch() {
-					
-				}*/
-			}
 		}
 
 		public void addActionListener() {
