@@ -45,15 +45,15 @@ public class Suppression extends JPanel {
 		supInstall.addActionListener(b);
 		add(supInstall);
 		
-		RÃ©cupÃ©rerNomsTableau(connect);
+		RécupérerNomsTableau(connection);
 
 
 		setVisible(true);
 	}
 	
-	private void RÃ©cupÃ©rerNomsTableau(Connection connect) {
+	private void RécupérerNomsTableau(Connection connection) {
 		try {
-			PreparedStatement prepStat = connect.prepareStatement("SELECT libelle FROM familleSoftware;");
+			PreparedStatement prepStat = connection.prepareStatement("SELECT libelle FROM familleSoftware;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
 			for(int i = 0; i <= table2.getRowCount()-1; i++) {
 				familleSoft.addItem((String) table2.getValueAt(i, 0));
@@ -102,6 +102,5 @@ public class Suppression extends JPanel {
 			validate();
 		}
 	}
-		}
-	}
+
 }
