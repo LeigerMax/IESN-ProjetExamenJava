@@ -36,10 +36,8 @@ public class NouvelleInstallation extends JPanel {
 
 		
 		//Titre
-		
 		labelTitre = new JLabel("Nouvelle installation : "); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,16));
-		//add(labelTitre,BorderLayout.NORTH); 
 		
 		
 		panneauTitre = new JPanel( );     
@@ -48,7 +46,6 @@ public class NouvelleInstallation extends JPanel {
 		add(panneauTitre, BorderLayout.NORTH);
 		
 		// IdInstallation
-		
 		labelIdInstallation = new JLabel("Id Installation  : "); 
 		zoneTexteIdInstallation = new JTextField(5); 
 		zoneTexteIdInstallation.setEnabled(false);
@@ -56,26 +53,20 @@ public class NouvelleInstallation extends JPanel {
 		RécupérerIdInstallation(connection);
 		
 		//Date
-		
 		labelDateInstallation = new JLabel("Date d'installation  : "); 
 		panneauDateInstallation = new ComboxDate();
 
 		
 		//Type d'installation : booléen précisant si installation standard ou personnalisée 
-		
-		
 		labelTypeInstallation = new JLabel("Type d'installation  : "); 
-
 		comboBoxTypeInstallation = new JComboBox<String>(listeTypeBool);
 	
 		//Commentaires PAS OBLIGATOIRE
-		
 		labelCommentaires = new JLabel("Commentaire  : "); 
 		zoneTexteCommentaires = new JTextField(25); 
 
 		
 		//Duree Installation PAS OBLIGATOIRE
-		
 		labelDureeInstallation = new JLabel("Durée Installation  : "); 
 		modelSpinner = new SpinnerNumberModel(0,0,999,1);
 		spinnerDureeInstallation = new JSpinner(modelSpinner);
@@ -86,13 +77,11 @@ public class NouvelleInstallation extends JPanel {
 		zoneTextRefProcedureInstallation = new JTextField(25); 
 		
 		//Validation  
-		labelValidation = new JLabel("Validation  : "); 
-		
+		labelValidation = new JLabel("Validation : "); 
 		boutonAPrevoir = new JRadioButton("A prevoir",false); 
-		boutonTerminee = new JRadioButton("Terminée",true); 
+		boutonTerminee = new JRadioButton("Terminée",false); 
 		boutonEnCours = new JRadioButton("En cours",false); 
 
-		
 		boutonGroupe = new ButtonGroup();
 		boutonGroupe.add(boutonAPrevoir);
 		boutonGroupe.add(boutonTerminee);
@@ -110,7 +99,6 @@ public class NouvelleInstallation extends JPanel {
 		panneauValidation.add(boutonEnCours); 
 
 		//DateValidation PAS OBLIGATOIRE UNIQUEMENT SI VALIDATION EST A PREVOIR
-		
 		labelDateValidation = new JLabel("Date Validation : "); 
 		labelDateValidation.setVisible(false);	
 		panneauDateAPrevoir = new ComboxDate();
@@ -128,8 +116,6 @@ public class NouvelleInstallation extends JPanel {
 
 		
 		//panneauFormulaire
-	
-		
 		panneauFormulaire = new JPanel( );     
 		panneauFormulaire.setLayout(new GridLayout( 11, 2, 0, 0 ));
 		panneauFormulaire.add(labelIdInstallation); 
@@ -157,9 +143,10 @@ public class NouvelleInstallation extends JPanel {
 		add(panneauFormulaire,BorderLayout.CENTER);
 		
 		//Bouton
-		
 		BoutonInsertion boutonInsertion = new BoutonInsertion(this,connection);
 		add(boutonInsertion);
+		
+		
 		
 		//Ajout réussi
 		labelAjoutReussi = new JLabel("Ajout réussi ! "); 
@@ -173,10 +160,11 @@ public class NouvelleInstallation extends JPanel {
 		setVisible(true);
 	}
 	
+
 	
-	private void RécupérerIdInstallation(Connection connect) {
+	private void RécupérerIdInstallation(Connection connection) {
 		try {
-			PreparedStatement prepStat = connect.prepareStatement("SELECT MAX(IdInstallation) FROM installation ORDER BY IdInstallation DESC;");
+			PreparedStatement prepStat = connection.prepareStatement("SELECT MAX(IdInstallation) FROM installation ORDER BY IdInstallation DESC;");
 			TableModelGen idInsallation = AccessBDGen.creerTableModel(prepStat);
 			Integer idPlusHaut = (Integer) idInsallation.getValueAt(0, 0) + 1;
 			zoneTexteIdInstallation.setText(""+idPlusHaut);
@@ -186,11 +174,11 @@ public class NouvelleInstallation extends JPanel {
 		}}
 	
 	
-	private void RécupérerSoftwareMatriculeOs(Connection connect) {
+	private void RécupérerSoftwareMatriculeOs(Connection connection) {
 		try {
-			PreparedStatement prepStatSoftware = connect.prepareStatement("SELECT Nom FROM Software;");
-			PreparedStatement prepStatMatricule = connect.prepareStatement("SELECT NomPrenom FROM ResponsableReseaux;");
-			PreparedStatement prepStatOS = connect.prepareStatement("SELECT Libelle FROM OS;");
+			PreparedStatement prepStatSoftware = connection.prepareStatement("SELECT Nom FROM Software;");
+			PreparedStatement prepStatMatricule = connection.prepareStatement("SELECT NomPrenom FROM ResponsableReseaux;");
+			PreparedStatement prepStatOS = connection.prepareStatement("SELECT Libelle FROM OS;");
 			TableModelGen tableSoftware = AccessBDGen.creerTableModel(prepStatSoftware);
 			TableModelGen tableMatricule = AccessBDGen.creerTableModel(prepStatMatricule);
 			TableModelGen tableOS = AccessBDGen.creerTableModel(prepStatOS);
@@ -217,12 +205,12 @@ public class NouvelleInstallation extends JPanel {
 				 labelDateValidation.setVisible(true);
 				 choixBouton ="A prevoir";
 				}
-			  if(e.getSource()==boutonTerminee && e.getStateChange()==ItemEvent.SELECTED) {
+			 else if(e.getSource()==boutonTerminee && e.getStateChange()==ItemEvent.SELECTED) {
 				 panneauDateAPrevoir.setVisible(false);
 				 labelDateValidation.setVisible(false);
 				 choixBouton = "Terminée";
 				}
-			  if(e.getSource()==boutonEnCours && e.getStateChange()==ItemEvent.SELECTED) {
+			 else if(e.getSource()==boutonEnCours && e.getStateChange()==ItemEvent.SELECTED) {
 				 panneauDateAPrevoir.setVisible(false);
 				 labelDateValidation.setVisible(false);
 				 choixBouton = "En cours";
@@ -276,7 +264,6 @@ public class NouvelleInstallation extends JPanel {
 			}
 			
 			//Validation annéePrévoir, moisPrévoir,jourPrévoir;
-			
 			if (choixBouton =="A prevoir") {
 				myPrepStat.setString(7, "A prevoir");
 				myPrepStat.setDate(8, new java.sql.Date(panneauDateAPrevoir.getDate().getTime()));
@@ -289,6 +276,7 @@ public class NouvelleInstallation extends JPanel {
 				myPrepStat.setString(7,"En cours");
 				myPrepStat.setNull(8, Types.DATE);
 			}
+
 
 			
 			//Software
@@ -347,9 +335,17 @@ public class NouvelleInstallation extends JPanel {
 			myPrepStat.executeUpdate();
 			
 			panneauAjoutReussi.setVisible(true);
+			réinitialiser(connection);
 			
 		}
 		catch(SQLException e) {
 			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}}
+	
+	public void réinitialiser(Connection connection) {
+		zoneTexteCommentaires.setText("");
+		zoneTextRefProcedureInstallation.setText("");
+		spinnerDureeInstallation.setValue(0);
+		RécupérerIdInstallation(connection);
+	}
 }
