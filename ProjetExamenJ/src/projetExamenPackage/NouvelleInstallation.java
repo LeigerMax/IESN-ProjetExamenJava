@@ -347,5 +347,5 @@ public class NouvelleInstallation extends JPanel {
 		zoneTextRefProcedureInstallation.setText("");
 		spinnerDureeInstallation.setValue(0);
 		RécupérerIdInstallation(connection);
-	}
+	} 
 }
