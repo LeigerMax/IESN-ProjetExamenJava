@@ -229,7 +229,6 @@ public class NouvelleInstallation extends JPanel {
 			
 			//Date
 			myPrepStat.setDate(2, new java.sql.Date(panneauDateInstallation.getDate().getTime()));
-			
 				
 			//TypeInstallation
 			if(comboBoxTypeInstallation.getSelectedItem().equals("Standard")) {
