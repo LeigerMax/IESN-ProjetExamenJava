@@ -13,7 +13,7 @@ public class ComboxDate extends JPanel {
 	private JComboBox<Integer> année,jour;
 	private JComboBox<String>  mois;
 	private String[] listeMois = {"Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"};
-	private java.util.Date dateJava;
+	private java.util.Date dateUtilJava;
 	
 	public ComboxDate() {
 		setLayout(new GridLayout(1,3,1,1));
@@ -36,14 +36,20 @@ public class ComboxDate extends JPanel {
 		}
 		
 		public Date getDate() {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String dateText = année.getSelectedItem()+"-"+mois.getSelectedIndex()+"-"+jour.getSelectedItem();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+			String dateString = année.getSelectedItem()+"-"+mois.getSelectedIndex()+"-"+jour.getSelectedItem();
 			try {
-				dateJava = sdf.parse(dateText);
+				dateUtilJava = simpleDateFormat.parse(dateString);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			return dateJava;
+			return dateUtilJava;
+		}
+		
+		public String getDateAcquis() {
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+			String dateString = année.getSelectedItem()+"-"+mois.getSelectedIndex()+"-"+jour.getSelectedItem();
+			return dateString;
 		}
 	}
 
