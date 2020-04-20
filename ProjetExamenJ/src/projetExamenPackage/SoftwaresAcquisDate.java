@@ -11,8 +11,9 @@ public class SoftwaresAcquisDate extends JPanel {
 	private JButton boutonChoix;
 	private Fenetre parent;
 	private String SqlSelectFrom, stringDateDébut,stringDateFin;
-	private JComboBox<Integer> année, mois ,jour;
-	private JComboBox<Integer> annéeF, moisF ,jourF;
+	//private JComboBox<Integer> année, mois ,jour;
+	//private JComboBox<Integer> annéeF, moisF ,jourF;
+	private ComboxDate panneauDateDébut,panneauDateAFin;
 
 	
 	public  SoftwaresAcquisDate(Connection connection, Fenetre fenetre) {
@@ -28,9 +29,18 @@ public class SoftwaresAcquisDate extends JPanel {
 		labelDateDébut.setBounds(100,50,100,40); 
 		add(labelDateDébut); 
 		
+		panneauDateDébut = new ComboxDate();
+		panneauDateDébut.setBounds(180,50,175,40); 
+		add(panneauDateDébut);
+		
 		labelDateFin = new JLabel("Date Fin : "); 
 		labelDateFin.setBounds(360,50,100,40); 
 		add(labelDateFin); 
+		
+		panneauDateAFin = new ComboxDate();
+		panneauDateAFin.setBounds(420,50,175,40); 
+		add(panneauDateAFin);
+		
 		
 		boutonChoix = new JButton("Afficher");
 		boutonChoix.setBounds(600,50,80,30); 
@@ -40,8 +50,11 @@ public class SoftwaresAcquisDate extends JPanel {
 		ActionAfficher a = new ActionAfficher();
 		boutonChoix.addActionListener(a);
 		
+
 		
-		année = new JComboBox<Integer>();
+
+		
+		/*année = new JComboBox<Integer>();
 		mois = new JComboBox<Integer>();
 		jour = new JComboBox<Integer>();
 		annéeF = new JComboBox<Integer>();
@@ -74,7 +87,7 @@ public class SoftwaresAcquisDate extends JPanel {
 		add(jour);
 		add(annéeF);
 		add(moisF);
-		add(jourF);
+		add(jourF);*/
 		
 		
 
@@ -86,21 +99,14 @@ public class SoftwaresAcquisDate extends JPanel {
 	
 	private class ActionAfficher implements ActionListener{
 		public void actionPerformed( ActionEvent a){
-			stringDateDébut = année.getSelectedItem()+"-"+(mois.getSelectedItem())+"-"+jour.getSelectedItem();
-			stringDateFin = annéeF.getSelectedItem()+"-"+(moisF.getSelectedItem())+"-"+jourF.getSelectedItem();
-			SqlSelectFrom = "SELECT * FROM installation join software WHERE software.DateAcquisition BETWEEN '"+stringDateDébut+"' AND '"+stringDateFin+"';";
+			SqlSelectFrom = "SELECT * FROM installation join software WHERE software.DateAcquisition BETWEEN '"+panneauDateDébut.getDateAcquis()+"' AND '"+panneauDateAFin.getDateAcquis()+"';";
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 
-			
 			removeAll();
 			add(labelTitre);
 			add(boutonChoix);
-			add(année);
-			add(mois);
-			add(jour);
-			add(annéeF);
-			add(moisF);
-			add(jourF);
+			add(panneauDateDébut);
+			add(panneauDateAFin);
 			afficherLaTable.setBounds(100,100,600, 400); 
 			add(afficherLaTable,BorderLayout.CENTER);
 			validate();
