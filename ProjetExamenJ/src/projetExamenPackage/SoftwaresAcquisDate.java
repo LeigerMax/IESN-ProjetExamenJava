@@ -11,8 +11,6 @@ public class SoftwaresAcquisDate extends JPanel {
 	private JButton boutonChoix;
 	private Fenetre parent;
 	private String SqlSelectFrom, stringDateDébut,stringDateFin;
-	//private JComboBox<Integer> année, mois ,jour;
-	//private JComboBox<Integer> annéeF, moisF ,jourF;
 	private ComboxDate panneauDateDébut,panneauDateAFin;
 
 	
@@ -49,47 +47,6 @@ public class SoftwaresAcquisDate extends JPanel {
 
 		ActionAfficher a = new ActionAfficher();
 		boutonChoix.addActionListener(a);
-		
-
-		
-
-		
-		/*année = new JComboBox<Integer>();
-		mois = new JComboBox<Integer>();
-		jour = new JComboBox<Integer>();
-		annéeF = new JComboBox<Integer>();
-		moisF = new JComboBox<Integer>();
-		jourF = new JComboBox<Integer>();
-
-		for(int annéeI=2020;annéeI>=1900;annéeI--) {
-			année.addItem(annéeI);
-			annéeF.addItem(annéeI);
-		}
-		for(int moisI=1;moisI<=12;moisI++) {
-			mois.addItem(moisI);
-			moisF.addItem(moisI);
-		}
-		for(int jourI=1;jourI<=31;jourI++) {
-			jour.addItem(jourI);
-			jourF.addItem(jourI);
-		}
-		
-		année.setBounds(175,50,65,30); 
-		mois.setBounds(240,50,45,30); 
-		jour.setBounds(285,50,45,30); 
-		annéeF.setBounds(425,50,65,30); 
-		moisF.setBounds(490,50,45,30); 
-		jourF.setBounds(535,50,45,30); 
-		
-		
-		add(année);
-		add(mois);
-		add(jour);
-		add(annéeF);
-		add(moisF);
-		add(jourF);*/
-		
-		
 
 		setVisible(true);
 	}
@@ -99,7 +56,7 @@ public class SoftwaresAcquisDate extends JPanel {
 	
 	private class ActionAfficher implements ActionListener{
 		public void actionPerformed( ActionEvent a){
-			SqlSelectFrom = "SELECT * FROM installation join software WHERE software.DateAcquisition BETWEEN '"+panneauDateDébut.getDateAcquis()+"' AND '"+panneauDateAFin.getDateAcquis()+"';";
+			SqlSelectFrom = "SELECT * FROM installation join software on installation.CodeSoftware = software.CodeSoftware WHERE software.DateAcquisition BETWEEN '"+panneauDateDébut.getDateAcquis()+"' AND '"+panneauDateAFin.getDateAcquis()+"';";
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 
 			removeAll();
@@ -107,7 +64,7 @@ public class SoftwaresAcquisDate extends JPanel {
 			add(boutonChoix);
 			add(panneauDateDébut);
 			add(panneauDateAFin);
-			afficherLaTable.setBounds(100,100,600, 400); 
+			afficherLaTable.setBounds(5,100,775, 400); 
 			add(afficherLaTable,BorderLayout.CENTER);
 			validate();
 		}}

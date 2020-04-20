@@ -18,6 +18,7 @@ public class AfficherLesTables extends JPanel{
 	
 	AfficherLesTables(Connection connection, Fenetre fenetre) {
 		setLayout(null);
+
 		parent = fenetre;
 		
 		labelTitre = new JLabel("Afficher tableau "); 
@@ -69,7 +70,7 @@ public class AfficherLesTables extends JPanel{
 				add(labelTitre);
 				add(comboxChoix);
 				add(boutonChoix);
-				afficherLaTable.setBounds(100,100,600, 400); 
+				afficherLaTable.setBounds(5,100,775, 400); 
 				add(afficherLaTable);
 				validate();
 			}}

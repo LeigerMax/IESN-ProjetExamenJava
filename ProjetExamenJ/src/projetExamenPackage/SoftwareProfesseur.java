@@ -54,7 +54,7 @@ public class SoftwareProfesseur extends JPanel{
 	
 	private class ActionAfficher implements ActionListener{
 		public void actionPerformed( ActionEvent a){
-			SqlSelectFrom = "SELECT DISTINCT  Nom FROM Software JOIN utilisationsoftware on Software.CodeSoftware = utilisationsoftware.CodeSoftware JOIN anneeetude ON utilisationsoftware.IdAnneeEtude = anneeetude.IdAnneeEtude JOIN section ON anneeetude.CodeSection = section.CodeSection JOIN professeur ON section.CodeSection = professeur.CodeSection WHERE professeur.NomPrenom LIKE '"+(String)comboxChoix.getSelectedItem()+"';";
+			SqlSelectFrom = "SELECT DISTINCT Nom FROM Software JOIN utilisationsoftware on Software.CodeSoftware = utilisationsoftware.CodeSoftware JOIN anneeetude ON utilisationsoftware.IdAnneeEtude = anneeetude.IdAnneeEtude JOIN section ON anneeetude.CodeSection = section.CodeSection JOIN professeur ON section.CodeSection = professeur.CodeSection WHERE professeur.NomPrenom LIKE '"+(String)comboxChoix.getSelectedItem()+"';";
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 
 			
@@ -63,7 +63,7 @@ public class SoftwareProfesseur extends JPanel{
 			add(labelTitre);
 			add(comboxChoix);
 			add(boutonChoix);
-			afficherLaTable.setBounds(100,100,600, 400); 
+			afficherLaTable.setBounds(5,100,775, 400); 
 			add(afficherLaTable);
 			validate();
 		}}
