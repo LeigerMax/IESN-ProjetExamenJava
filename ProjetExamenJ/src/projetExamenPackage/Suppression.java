@@ -45,13 +45,13 @@ public class Suppression extends JPanel {
 		supInstall.addActionListener(b);
 		add(supInstall);
 		
-		RécupérerNomsTableau(connection);
+		RÃ©cupÃ©rerNomsTableau(connection);
 
 
 		setVisible(true);
 	}
 	
-	private void RécupérerNomsTableau(Connection connection) {
+	private void RÃ©cupÃ©rerNomsTableau(Connection connection) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement("SELECT libelle FROM familleSoftware;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
@@ -66,10 +66,8 @@ public class Suppression extends JPanel {
 	}
 	
 	public class ActionBoutonAfficher implements ActionListener{
-
 		public void actionPerformed(ActionEvent a) {
-			
-			SqlSelectFrom = "SELECT * FROM "+(String)familleSoft.getSelectedItem()+";";
+			SqlSelectFrom = "SELECT DateInstallation FROM installation JOIN software ON installation.CodeSoftware = software.CodeSoftware JOIN famillesoftware ON software.IdFamSoft = famillesoftware.IdFamSoft WHERE famillesoftware.lebelle LIKE" + (String)familleSoft.getSelectedItem()+";";
 			AfficherUneTable afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 			
 			removeAll();
@@ -78,14 +76,13 @@ public class Suppression extends JPanel {
 			add(familleSoft);
 			add(affInstall);
 			add(supInstall);
-			afficherLaTable.setBounds(100, 100, 600, 400);
+			afficherLaTable.setBounds(5, 100, 775, 400);
 			add(afficherLaTable);
 			validate();
 		}
 	}
 	
 	public class ActionBoutonSupprimer implements ActionListener{
-
 		public void actionPerformed(ActionEvent b) {
 			//Pas correct
 			SqlSelectFrom = "DELETE * FROM" + (String)familleSoft.getSelectedItem()+";";
@@ -97,7 +94,7 @@ public class Suppression extends JPanel {
 			add(familleSoft);
 			add(affInstall);
 			add(supInstall);
-			afficherLaTable.setBounds(100, 100, 600, 400);
+			afficherLaTable.setBounds(5, 100, 775, 400);
 			add(afficherLaTable);
 			validate();
 		}
