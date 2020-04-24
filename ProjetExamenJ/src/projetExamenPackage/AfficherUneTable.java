@@ -8,15 +8,16 @@ import accessBD.*;
 
 
 public class AfficherUneTable extends JPanel {
-	private static JTable table2;
+	private static JTable jTable;
 	
 	public AfficherUneTable(Connection connection, String SqlSelectFrom) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement(SqlSelectFrom);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
-		 	table2 = new JTable(table);
-
-		 	JScrollPane defilant = new JScrollPane (table2) ;
+			jTable = new JTable(table);
+			jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Obtenir un meilleur affiche des tableaux
+			jTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Permettre à l'user de ne sélectionner qu'une seule ligne
+			JScrollPane defilant = new JScrollPane (jTable) ;
 		 	defilant.setPreferredSize(new Dimension(775, 400));
 		 	this.add(defilant);
 			}

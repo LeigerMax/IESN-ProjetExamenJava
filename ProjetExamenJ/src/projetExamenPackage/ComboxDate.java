@@ -40,7 +40,8 @@ public class ComboxDate extends JPanel {
 			String dateString = année.getSelectedItem()+"-"+mois.getSelectedIndex()+"-"+jour.getSelectedItem();
 			try {
 				dateUtilJava = simpleDateFormat.parse(dateString);
-			} catch (ParseException e) {
+			} 
+			catch (ParseException e) {
 				e.printStackTrace();
 			}
 			return dateUtilJava;
@@ -48,7 +49,6 @@ public class ComboxDate extends JPanel {
 		
 		public String getDateAcquis() {
 			String dateString = année.getSelectedItem()+"-0"+(mois.getSelectedIndex()+1)+"-"+jour.getSelectedItem();
-
 			return dateString;
 		}
 	}

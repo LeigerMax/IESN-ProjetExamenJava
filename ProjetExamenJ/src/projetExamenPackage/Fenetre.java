@@ -9,22 +9,29 @@ import accessBD.*;
 public class Fenetre extends JFrame {
 	
 	private Connection connection;
-	private Login login;
+	private Login loginConect;
 	private Container cont;
 	private JLabel message;
 	private JMenuBar menuBarre;
 	private JMenu menuApplication, menuBaseDeDonnée, menuAide; 
-	private JMenuItem menuQuitter, menuNouvelleInstallation, menuSupprimerUneInstallation, menuLectureTable, menuSoftwaresAcquisDate, menuSoftwareProfesseur, menuCommentaire, menuPropos,menuAccueil; 
+	private JMenuItem menuItemAccueil,menuItemQuitter, menuItemNouvelleInstallation, menuItemLectureTable, menuItemSoftwaresAcquisDate, menuItemSoftwareProfesseur, menuItemSupprimerUneInstallation, menuItemCommentaire, menuItemPropos; 
 
 	
-	public Fenetre(Login parent) {
+	public Fenetre(Login loginConect) {
+		
 		super("Examen Java ");
 	    setBounds(500,200,800,600);
 	    setResizable(false);
-	    this.login=parent;   
-	    connection=login.getConnect();
+	    this.loginConect=loginConect;   
+	    connection=loginConect.getConnect();
 	
-	    //Menu
+		//Message de bienvenue
+		message = new JLabel("Bienvenue dans l'application réalisée pour le cour de Java 2");
+		message.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
+		message.setHorizontalAlignment(SwingConstants.CENTER);
+		add(message);
+		
+		//Menu
 	    menuBarre = new JMenuBar(); 
 		setJMenuBar(menuBarre);
 		
@@ -35,65 +42,72 @@ public class Fenetre extends JFrame {
 		menuBarre.add(menuBaseDeDonnée);
 		menuAide = new JMenu("Aide");
 		menuBarre.add(menuAide);
-		
-		//Message de bienvenue
-		message = new JLabel("Bienvenue dans l'application réalisée pour le cour de Java 2");
-		message.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
-		message.setHorizontalAlignment(SwingConstants.CENTER);
-		add(message);
+
 		
 		//JMenuItem
-		menuAccueil = new JMenuItem("Déconnexion");
-		menuAccueil.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,InputEvent.CTRL_MASK));
-		menuApplication.add(menuAccueil);
-		menuActionDéconnexion accueil = new menuActionDéconnexion();    
-		menuAccueil.addActionListener(accueil);
+		menuItemAccueil = new JMenuItem("Déconnexion");
+		menuItemAccueil.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,InputEvent.CTRL_MASK));
+		menuApplication.add(menuItemAccueil);
+		menuActionDéconnexion actionDéconnexion = new menuActionDéconnexion();    
+		menuItemAccueil.addActionListener(actionDéconnexion);
 		
-		menuQuitter = new JMenuItem("Sortie");
-		menuQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,InputEvent.CTRL_MASK));
-		menuApplication.add(menuQuitter);
-		MenuActionQuitter Exit = new MenuActionQuitter();     
-		menuQuitter.addActionListener(Exit);
+		menuItemQuitter = new JMenuItem("Sortie");
+		menuItemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,InputEvent.CTRL_MASK));
+		menuApplication.add(menuItemQuitter);
+		MenuActionQuitter actionQuitter = new MenuActionQuitter();     
+		menuItemQuitter.addActionListener(actionQuitter);
 		
-		menuNouvelleInstallation = new JMenuItem("Nouvelle Installation"); 
-		menuBaseDeDonnée.add(menuNouvelleInstallation);
-		MenuActionNouvelleInstallation NouvelleInstallation = new MenuActionNouvelleInstallation();    
-		menuNouvelleInstallation.addActionListener(NouvelleInstallation);
+		menuItemNouvelleInstallation = new JMenuItem("Nouvelle Installation"); 
+		menuBaseDeDonnée.add(menuItemNouvelleInstallation);
+		MenuActionNouvelleInstallation actionNouvelleInstallation = new MenuActionNouvelleInstallation();    
+		menuItemNouvelleInstallation.addActionListener(actionNouvelleInstallation);
 		
-		menuLectureTable = new JMenuItem("Lecture d'une table"); 
-		menuBaseDeDonnée.add(menuLectureTable);
-		MenuActionLectureInstallation LectureInstallation = new MenuActionLectureInstallation();    
-		menuLectureTable.addActionListener(LectureInstallation);
+		menuItemLectureTable = new JMenuItem("Lecture des tables"); 
+		menuBaseDeDonnée.add(menuItemLectureTable);
+		MenuActionLectureTable actionLectureTable = new MenuActionLectureTable();    
+		menuItemLectureTable.addActionListener(actionLectureTable);
 		
-		menuSoftwaresAcquisDate = new JMenuItem("Softwares Acquis Date"); 
-		menuBaseDeDonnée.add(menuSoftwaresAcquisDate);
-		MenuActionSoftwaresAcquisDate SoftwaresAcquisDate = new MenuActionSoftwaresAcquisDate();    
-		menuSoftwaresAcquisDate.addActionListener(SoftwaresAcquisDate);
+		menuItemSoftwaresAcquisDate = new JMenuItem("Softwares Acquis Date"); 
+		menuBaseDeDonnée.add(menuItemSoftwaresAcquisDate);
+		MenuActionSoftwaresAcquisDate actionSoftwaresAcquisDate = new MenuActionSoftwaresAcquisDate();    
+		menuItemSoftwaresAcquisDate.addActionListener(actionSoftwaresAcquisDate);
 		
-		menuSoftwareProfesseur = new JMenuItem("Softwares Professeur"); 
-		menuBaseDeDonnée.add(menuSoftwareProfesseur);
-		MenuActionSoftwareProfesseur SoftwareProfesseur = new MenuActionSoftwareProfesseur();    
-		menuSoftwareProfesseur.addActionListener(SoftwareProfesseur);
+		menuItemSoftwareProfesseur = new JMenuItem("Softwares Professeur"); 
+		menuBaseDeDonnée.add(menuItemSoftwareProfesseur);
+		MenuActionSoftwareProfesseur actionSoftwareProfesseur = new MenuActionSoftwareProfesseur();    
+		menuItemSoftwareProfesseur.addActionListener(actionSoftwareProfesseur);
 		
-		menuSupprimerUneInstallation = new JMenuItem("Supprimer Installation"); 
-		menuBaseDeDonnée.add(menuSupprimerUneInstallation);
-		MenuActionSupprimerInstallation SupprimerInstallation = new MenuActionSupprimerInstallation();    
-		menuSupprimerUneInstallation.addActionListener(SupprimerInstallation);
+		menuItemSupprimerUneInstallation = new JMenuItem("Supprimer Installation"); 
+		menuBaseDeDonnée.add(menuItemSupprimerUneInstallation);
+		MenuActionSupprimerInstallation actionSupprimerInstallation = new MenuActionSupprimerInstallation();    
+		menuItemSupprimerUneInstallation.addActionListener(actionSupprimerInstallation);
 		
-		menuCommentaire = new JMenuItem("Commentaire"); 
-		menuAide.add(menuCommentaire);
-		menuActionCommentaire Commentaire = new menuActionCommentaire();    
-		menuCommentaire.addActionListener(Commentaire); 
+		menuItemCommentaire = new JMenuItem("Commentaire"); 
+		menuAide.add(menuItemCommentaire);
+		menuActionCommentaire actionCommentaire = new menuActionCommentaire();    
+		menuItemCommentaire.addActionListener(actionCommentaire); 
 		
 		menuAide.addSeparator(); 
 		
-		menuPropos = new JMenuItem("A propos"); 
-		menuAide.add(menuPropos);
-		menuActionPropos Propos = new menuActionPropos();    
-		menuPropos.addActionListener(Propos); 
+		menuItemPropos = new JMenuItem("A propos"); 
+		menuAide.add(menuItemPropos);
+		menuActionPropos actionPropos = new menuActionPropos();    
+		menuItemPropos.addActionListener(actionPropos); 
 		
-	    setVisible(true);
-	    
+		//Quitter via la croix rouge
+	    addWindowListener(new WindowAdapter() { 
+	    	public void windowClosing(WindowEvent e) {
+				try {
+					connection.close();
+					System.exit(0);
+				}
+				catch(SQLException exit1) { 
+					System.out.println(exit1.getMessage());
+				}	
+	    	}
+	    });
+		
+	    setVisible(true);	    
 	}
 	
 	
@@ -102,13 +116,13 @@ public class Fenetre extends JFrame {
 			dispose();
 			try {
 				connection.close();
-				System.out.println("Déco");
-				Accueil fenetreDéconnexion = new Accueil();
+				LoginFenetre loginFenetre = new LoginFenetre();
 			}
 			catch(SQLException exit1) { 
 				System.out.println(exit1.getMessage());
 			}
-		}} 
+		}
+	} 
 	
 	
 	private class MenuActionQuitter implements ActionListener  { 
@@ -118,9 +132,8 @@ public class Fenetre extends JFrame {
 			}
 			catch(SQLException exit1) { }
 			System.exit(0);
-		}}
-	
-
+		}
+	}
 	
 	
 	private class MenuActionNouvelleInstallation implements ActionListener {
@@ -144,7 +157,7 @@ public class Fenetre extends JFrame {
 		}}
 	
 	
-	private class MenuActionLectureInstallation implements ActionListener {
+	private class MenuActionLectureTable implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
 			getContentPane().removeAll();
 			AfficherLesTables afficherLesTables = new AfficherLesTables (connection,Fenetre.this);

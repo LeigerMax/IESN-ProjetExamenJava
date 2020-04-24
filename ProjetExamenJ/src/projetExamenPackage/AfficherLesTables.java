@@ -7,51 +7,49 @@ import javax.swing.*;
 import accessBD.*;
 
 
-
 public class AfficherLesTables extends JPanel{
 	private JLabel labelTitre;
-	private JButton boutonChoix;
-	private Fenetre parent;
+	private JButton boutonAfficher;
+	private Fenetre fenetreParent;
 	private String SqlSelectFrom;
-	private JComboBox<String> comboxChoix;
+	private JComboBox<String> comboChoix;
 	
-	
-	AfficherLesTables(Connection connection, Fenetre fenetre) {
-		setLayout(null);
-
-		parent = fenetre;
+	public AfficherLesTables(Connection connection, Fenetre fenetre) {
 		
+		setLayout(null);
+		fenetreParent = fenetre;
+		
+		//Titre
 		labelTitre = new JLabel("Afficher tableau "); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
 		labelTitre.setBounds(300,10,450,30); 
 		add(labelTitre); 
 
-		
-		comboxChoix = new JComboBox<String>();
-		comboxChoix.setBounds(270,50,150,30); 
-		add(comboxChoix);
-		
-		boutonChoix = new JButton("Afficher");
-		boutonChoix.setBounds(420,50,80,30); 
-		add(boutonChoix);
+		//Combox Choix
+		comboChoix = new JComboBox<String>();
+		comboChoix.setBounds(270,50,150,30); 
+		add(comboChoix);
 		
 		RécupérerNomsTableau(connection);
 		
+		//Bouton afficher
+		boutonAfficher = new JButton("Afficher");
+		boutonAfficher.setBounds(420,50,80,30); 
+		add(boutonAfficher);
 		
-		ActionAfficher a = new ActionAfficher();
-		boutonChoix.addActionListener(a);
+		ActionAfficherTable actionAfficherTable = new ActionAfficherTable();
+		boutonAfficher.addActionListener(actionAfficherTable);
 		
 
-		
 		setVisible(true);
 	}
 	
 	private void RécupérerNomsTableau(Connection connect) {
 		try {
 			PreparedStatement prepStat = connect.prepareStatement("SHOW TABLES");
-			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
-			for(int i=0; i <= table2.getRowCount()-1; i++) {
-				comboxChoix.addItem((String) table2.getValueAt(i, 0));
+			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
+			for(int i=0; i <= table.getRowCount()-1; i++) { 	// getRowCount() Connaitre le nombre de lignes à afficher
+				comboChoix.addItem((String) table.getValueAt(i, 0)); //getValueAt connaitre l'élément à mettre dans une cellule
 				}
 			}
 		catch(SQLException e) {
@@ -59,21 +57,18 @@ public class AfficherLesTables extends JPanel{
 		}
 	}
 	
-		private class ActionAfficher implements ActionListener{
-			public void actionPerformed( ActionEvent a){
-				SqlSelectFrom = "SELECT * FROM "+(String)comboxChoix.getSelectedItem()+";";
-				AfficherUneTable afficherLaTable  = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
+	private class ActionAfficherTable implements ActionListener{
+		public void actionPerformed(ActionEvent a){
+			SqlSelectFrom = "SELECT * FROM "+(String)comboChoix.getSelectedItem()+";";
+			AfficherUneTable afficherLaTable  = new AfficherUneTable(fenetreParent.getConnect(), SqlSelectFrom);
 
-				
-				removeAll();
-				
-				add(labelTitre);
-				add(comboxChoix);
-				add(boutonChoix);
-				afficherLaTable.setBounds(5,100,775, 400); 
-				add(afficherLaTable);
-				validate();
-			}}
-
-
+			removeAll();
+			add(labelTitre);
+			add(comboChoix);
+			add(boutonAfficher);
+			afficherLaTable.setBounds(5,100,775,400); 
+			add(afficherLaTable);
+			validate();
+		}
+	}
 }

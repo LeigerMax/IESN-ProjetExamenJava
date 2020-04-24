@@ -1,38 +1,37 @@
 package projetExamenPackage;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-
+import java.awt.event.*;
+import java.sql.*;
 import javax.swing.*;
-
+import accessBD.*;
 
 
 public class BoutonInsertion extends JPanel{
-	private static final long serialVersionUID = 1L;
-	private JButton boutonInserction;
+	private JButton boutonInsertion;
 	private NouvelleInstallation nouvelleInstallation;
 	private Connection connection;
 	
 	public BoutonInsertion(NouvelleInstallation nouvelleInstallation,Connection connection) {
+		
 		this.nouvelleInstallation=nouvelleInstallation;
 		this.connection=connection;
 		
-		boutonInserction = new JButton("Insertion");
+		//Bouton insertion
+		boutonInsertion = new JButton("Insertion");
+		add(boutonInsertion);
 		
-		add(boutonInserction);
-		
-		ActionInserction actionInserction = new ActionInserction();
-		boutonInserction.addActionListener(actionInserction);
+		ActionInsertion actionInsertion= new ActionInsertion();
+		boutonInsertion.addActionListener(actionInsertion);
 		
 		setVisible(true);
 	}
 	
-	private class ActionInserction implements ActionListener{
+	private class ActionInsertion implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()==boutonInserction) {
+			if(e.getSource()==boutonInsertion) {
 				nouvelleInstallation.AjoutNouvelleInstallation(connection);
-
-		}}}
+			}
+		}
+	}
 }	

@@ -4,26 +4,27 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
-import accessBD.AccessBDGen; 
-import accessBD.TableModelGen; 
+import accessBD.*; 
 
-
-
-public class Accueil extends JFrame {
+public class LoginFenetre extends JFrame {
 	private Container cont;
 	
-	public Accueil() {
-
+	public LoginFenetre() {
+		
 	    cont = getContentPane();
-	    Login login = new Login(this);
+	    Login login= new Login(this);
 	    add(login);
-		
-		
 	    setTitle("Bienvenue");
 	    setBounds(500,200,500,450);
 	    setResizable(false);
+
+		//Quitter via la croix rouge
+	    addWindowListener(new WindowAdapter() { 
+	    	public void windowClosing(WindowEvent e) {
+	    		System.exit(0);
+	    	}
+	    });
+
 		setVisible(true);
 	}
-	
-
 }

@@ -6,8 +6,6 @@ import java.sql.*;
 import javax.swing.*;
 import accessBD.*;
 
-
-
 public class Login extends JPanel {
 	
 	private JLabel labelTitre, labelDemandeConnexion, labelLogin, labelPassword;
@@ -15,10 +13,11 @@ public class Login extends JPanel {
 	private JTextField zoneTextelogin;
 	private JPasswordField zoneTextePassword;
 	private Connection connection;
-	private Accueil accueil;
-	private Login parent;
+	private LoginFenetre loginFenetre;
+	private Login loginConnect;
 	
-	public Login(Accueil accueil) {
+	public Login(LoginFenetre loginFenetre) {
+		
 		this.setLayout(null);
 		
 		//Titre et texte
@@ -50,14 +49,13 @@ public class Login extends JPanel {
 		boutonLogin = new JButton(" Login "); 
 		add(boutonLogin); 
 		boutonLogin.setBounds(100,320,150,50); 
-		ActionBoutonLogin login = new ActionBoutonLogin();
-		boutonLogin.addActionListener(login);
+		ActionBoutonLogin actionBoutonLogin = new ActionBoutonLogin();
+		boutonLogin.addActionListener(actionBoutonLogin);
 		
-		this.accueil=accueil;
-		parent=this;
 		
-		setVisible(true);
-		
+		this.loginFenetre=loginFenetre;
+		loginConnect=this;
+		setVisible(true);	
 	}
 	
 	public class ActionBoutonLogin implements ActionListener{
@@ -65,8 +63,9 @@ public class Login extends JPanel {
 			if(a.getSource()==boutonLogin) {
 				try {
 					connection = AccessBDGen.connecter("DbInstallations", "root","Tigrou007");
-					Fenetre fenetrePrincipal = new Fenetre(parent);
-					accueil.dispose();
+					JOptionPane.showMessageDialog(null,"Connexion réussie", "Connecter", JOptionPane.INFORMATION_MESSAGE);
+					Fenetre fenetrePrincipal = new Fenetre(loginConnect);
+					loginFenetre.dispose();
 				}
 				catch(SQLException e) {
 					JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -74,7 +73,8 @@ public class Login extends JPanel {
 			}
 		}
 	}
-	public Connection getConnect() {
+	
+	public Connection getConnect() { 
 		return connection;
 	}
 }

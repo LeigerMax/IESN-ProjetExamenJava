@@ -199,7 +199,7 @@ public class NouvelleInstallation extends JPanel {
 
 	
 	private class ItemRadioValidation implements ItemListener { 
-		 public void itemStateChanged( ItemEvent e) { 
+		 public void itemStateChanged(ItemEvent e) { 
 			 if(e.getSource()==boutonAPrevoir && e.getStateChange()==ItemEvent.SELECTED) {
 				 panneauDateAPrevoir.setVisible(true);
 				 labelDateValidation.setVisible(true);
