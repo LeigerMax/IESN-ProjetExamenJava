@@ -11,7 +11,7 @@ public class Suppression extends JPanel {
 	private JButton affInstall, supInstall;
 	private JComboBox<String> familleSoft;
 	private Fenetre parent;
-	private String SqlSelectFrom;
+	private String SqlSelectFrom, SqlRequete;
 	
 	public  Suppression(Connection connection, Fenetre fenetre) {
 		setLayout(null);
@@ -45,13 +45,13 @@ public class Suppression extends JPanel {
 		//supInstall.addActionListener(b);
 		add(supInstall);
 		
-		RécupérerNomsTableau(connection);
+		RÃ©cupÃ©rerNomsTableau(connection);
 
 
 		setVisible(true);
 	}
 	
-	private void RécupérerNomsTableau(Connection connection) {
+	private void RÃ©cupÃ©rerNomsTableau(Connection connection) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement("SELECT libelle FROM familleSoftware;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
