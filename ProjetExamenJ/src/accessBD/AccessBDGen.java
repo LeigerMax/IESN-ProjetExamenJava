@@ -36,7 +36,7 @@ public class AccessBDGen
      TableModelGen model = new TableModelGen(nomColonnes,lignes, objetTypes);
      return model;
     }
-
+    
     // Méthode appelée par la méthode creerTableModel pour récupérer les noms des colonnes
     private static ArrayList <String> creerNomColonnes(ResultSet donnees)
                 throws SQLException
