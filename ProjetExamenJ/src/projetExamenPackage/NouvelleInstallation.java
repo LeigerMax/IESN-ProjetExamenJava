@@ -10,29 +10,28 @@ import accessBD.*;
 
 
 public class NouvelleInstallation extends JPanel {
-	private JLabel labelTitre,labelObliger, labelIdInstallation,labelDateInstallation, labelTypeInstallation,labelCommentaires,labelDureeInstallation,labelRefProcedureInstallation,labelValidation,labelDateValidation, labelSoftware,labelMatricule, labelOS,labelAjoutReussi;
+	private JLabel labelTitre,labelObliger, labelIdInstallation,labelDateInstallation, labelTypeInstallation,labelCommentaires,labelDureeInstallation,labelRefProcedureInstallation,labelValidation,labelDateValidation, labelSoftware,labelMatricule, labelOS,labelAjoutReussi, labelAnnuler;
 	private JTextField zoneTexteIdInstallation, zoneTexteCommentaires,zoneTextRefProcedureInstallation; 
-	//private Fenetre parent;
-	private JComboBox<String> comboBoxTypeInstallation,comboxSoftware,comboxMatricule,  comboxOS;
+	private JComboBox<String> comboBoxTypeInstallation,comboxSoftware,comboxMatricule,comboxOS;
 	private String[] listeTypeBool = {"Standard","Personnalisée"};
 	private JSpinner spinnerDureeInstallation;
 	private SpinnerNumberModel modelSpinner;
 	private JRadioButton boutonAPrevoir, boutonTerminee,boutonEnCours; 
-	private JPanel panneauTitre, panneauFormulaire, panneauValidation; 
+	private JPanel panneauTitre, panneauFormulaire,panneauBoutons, panneauValidation; 
 	private ButtonGroup boutonGroupe; 
-	private String SqlInto;
+	private String SqlInto, SqlDelete;
 	private String choixBouton = "Terminée";
 	private ComboxDate panneauDateInstallation,panneauDateAPrevoir;
+	private Integer anulation = 0;
 
 	
 	public NouvelleInstallation(Connection connection, Fenetre fenetre) {
 		setLayout(new FlowLayout()); 
-		//parent = fenetre;
 		
 		//Titre
 		labelTitre = new JLabel("Nouvelle installation : "); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,30));
-		labelObliger = new JLabel("Obligatoire  : * "); 
+		labelObliger = new JLabel("Veillez remplir les champs obligatoire  : * "); 
 		labelObliger.setFont(new java.awt.Font(Font.SERIF,Font.ITALIC,15));
 		
 		panneauTitre = new JPanel( );     
@@ -123,8 +122,12 @@ public class NouvelleInstallation extends JPanel {
 
 		//Bouton
 		BoutonInsertion boutonInsertion = new BoutonInsertion(this,connection);
-		//add(boutonInsertion);
+		BoutonAnnulation boutonAnnulation = new BoutonAnnulation(this,connection);
 		
+		panneauBoutons = new JPanel( );     
+		panneauBoutons.setLayout(new GridLayout( 1, 2, 0, 0 ));
+		panneauBoutons.add(boutonInsertion);
+		panneauBoutons.add(boutonAnnulation);
 		
 		//Ajout réussi
 		labelAjoutReussi = new JLabel("Ajout réussi ! "); 
@@ -132,9 +135,15 @@ public class NouvelleInstallation extends JPanel {
 		labelAjoutReussi.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelAjoutReussi.setVisible(false);
 		
+		//Annuler
+		labelAnnuler = new JLabel("Annulation réussi ! "); 
+		labelAnnuler.setForeground(Color.red);
+		labelAnnuler.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelAnnuler.setVisible(false);
+		
 		//panneauFormulaire
 		panneauFormulaire = new JPanel( );     
-		panneauFormulaire.setLayout(new GridLayout( 12, 2, 10, 1 ));
+		panneauFormulaire.setLayout(new GridLayout( 11, 2, 10, 1 ));
 		panneauFormulaire.add(labelIdInstallation); 
 		panneauFormulaire.add(zoneTexteIdInstallation); 
 		panneauFormulaire.add(labelDateInstallation); 
@@ -157,10 +166,12 @@ public class NouvelleInstallation extends JPanel {
 		panneauFormulaire.add(comboxMatricule); 
 		panneauFormulaire.add(labelOS); 
 		panneauFormulaire.add(comboxOS); 
-		panneauFormulaire.add(labelAjoutReussi); 
-		panneauFormulaire.add(boutonInsertion); 
 		add(panneauFormulaire);
 		
+		//Add panneauBoutons et les labels
+		add(panneauBoutons);
+		add(labelAjoutReussi); ; 
+		add(labelAnnuler);
 
 		setVisible(true);
 	}
@@ -169,7 +180,7 @@ public class NouvelleInstallation extends JPanel {
 	
 	private void RécupérerIdInstallation(Connection connection) {
 		try {
-			PreparedStatement prepStat = connection.prepareStatement("SELECT MAX(IdInstallation) FROM installation ORDER BY IdInstallation DESC;");
+			PreparedStatement prepStat = connection.prepareStatement("select MAX(IdInstallation) from installation ;");
 			TableModelGen idInsallation = AccessBDGen.creerTableModel(prepStat);
 			Integer idPlusHaut = (Integer) idInsallation.getValueAt(0, 0) + 1;
 			zoneTexteIdInstallation.setText(""+idPlusHaut);
@@ -338,7 +349,9 @@ public class NouvelleInstallation extends JPanel {
 			
 			myPrepStat.executeUpdate();
 			
+			anulation = 1;
 			labelAjoutReussi.setVisible(true);
+			labelAnnuler.setVisible(false);
 			réinitialiser(connection);
 			
 		}
@@ -353,4 +366,23 @@ public class NouvelleInstallation extends JPanel {
 		spinnerDureeInstallation.setValue(0);
 		RécupérerIdInstallation(connection);
 	} 
+
+
+	public void ActionAnnulation(Connection connection) {
+		try {
+			if (anulation == 1) {
+				SqlDelete = "delete from installation order by IdInstallation desc limit 1;";
+				PreparedStatement prepStat = connection.prepareStatement(SqlDelete);
+				int annulation = prepStat.executeUpdate();
+				anulation = 0;
+				labelAjoutReussi.setVisible(false);
+				labelAnnuler.setVisible(true);
+				réinitialiser(connection);
+			}
+		}
+		catch(SQLException e) {
+			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 }
