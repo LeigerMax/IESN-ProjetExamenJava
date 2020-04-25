@@ -58,7 +58,7 @@ public class SoftwareProfesseur extends JPanel{
 	
 	private class ActionAfficherTable implements ActionListener{
 		public void actionPerformed(ActionEvent a){
-			SqlSelectFrom = "SELECT DISTINCT Nom FROM Software JOIN utilisationsoftware on Software.CodeSoftware = utilisationsoftware.CodeSoftware JOIN anneeetude ON utilisationsoftware.IdAnneeEtude = anneeetude.IdAnneeEtude JOIN section ON anneeetude.CodeSection = section.CodeSection JOIN professeur ON section.CodeSection = professeur.CodeSection WHERE professeur.NomPrenom LIKE '"+(String)comboChoix.getSelectedItem()+"';";
+			SqlSelectFrom = "select distinct Nom from Software join utilisationsoftware on Software.CodeSoftware = utilisationsoftware.CodeSoftware join anneeetude on utilisationsoftware.IdAnneeEtude = anneeetude.IdAnneeEtude join section on anneeetude.CodeSection = section.CodeSection join professeur on section.CodeSection = professeur.CodeSection where professeur.NomPrenom like '"+(String)comboChoix.getSelectedItem()+"';";
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(fenetreParent.getConnect(), SqlSelectFrom);
 			
 			removeAll();	

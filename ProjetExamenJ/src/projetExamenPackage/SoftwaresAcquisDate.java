@@ -56,7 +56,7 @@ public class SoftwaresAcquisDate extends JPanel {
 	
 	private class ActionAfficherTable implements ActionListener{
 		public void actionPerformed(ActionEvent a){
-			SqlSelectFrom = "SELECT * FROM installation join software on installation.CodeSoftware = software.CodeSoftware WHERE software.DateAcquisition BETWEEN '"+panneauDateDébut.getDateAcquis()+"' AND '"+panneauDateAFin.getDateAcquis()+"';";
+			SqlSelectFrom = "select * from installation join software on installation.CodeSoftware = software.CodeSoftware where software.DateAcquisition between '"+panneauDateDébut.getDateAcquis()+"' and '"+panneauDateAFin.getDateAcquis()+"';";
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(fenetreParent.getConnect(), SqlSelectFrom);
 			
 			removeAll();

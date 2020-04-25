@@ -46,7 +46,7 @@ public class AfficherLesTables extends JPanel{
 	
 	private void RécupérerNomsTableau(Connection connect) {
 		try {
-			PreparedStatement prepStat = connect.prepareStatement("SHOW TABLES");
+			PreparedStatement prepStat = connect.prepareStatement("show tables");
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
 			for(int i=0; i <= table.getRowCount()-1; i++) { 	// getRowCount() Connaitre le nombre de lignes à afficher
 				comboChoix.addItem((String) table.getValueAt(i, 0)); //getValueAt connaitre l'élément à mettre dans une cellule

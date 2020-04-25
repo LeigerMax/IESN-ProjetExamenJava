@@ -3,18 +3,14 @@ package projetExamenPackage;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import java.text.*;
+import java.util.*;
 import javax.swing.*;
-
 import accessBD.*;
 
 
-
-
 public class NouvelleInstallation extends JPanel {
-	private JLabel labelTitre, labelIdInstallation,labelDateInstallation, labelTypeInstallation,labelCommentaires,labelDureeInstallation,labelRefProcedureInstallation,labelValidation,labelDateValidation, labelSoftware,labelMatricule, labelOS,labelAjoutReussi;
+	private JLabel labelTitre,labelObliger, labelIdInstallation,labelDateInstallation, labelTypeInstallation,labelCommentaires,labelDureeInstallation,labelRefProcedureInstallation,labelValidation,labelDateValidation, labelSoftware,labelMatricule, labelOS,labelAjoutReussi;
 	private JTextField zoneTexteIdInstallation, zoneTexteCommentaires,zoneTextRefProcedureInstallation; 
 	//private Fenetre parent;
 	private JComboBox<String> comboBoxTypeInstallation,comboxSoftware,comboxMatricule,  comboxOS;
@@ -29,55 +25,63 @@ public class NouvelleInstallation extends JPanel {
 	private ComboxDate panneauDateInstallation,panneauDateAPrevoir;
 
 	
-	
 	public NouvelleInstallation(Connection connection, Fenetre fenetre) {
 		setLayout(new FlowLayout()); 
 		//parent = fenetre;
-
 		
 		//Titre
 		labelTitre = new JLabel("Nouvelle installation : "); 
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,16));
+		add(labelTitre);
 		
 		
-		panneauTitre = new JPanel( );     
+		/*panneauTitre = new JPanel( );     
 		panneauTitre.setLayout(new GridLayout( 1, 1, 0, 0 ));
 		panneauTitre.add(labelTitre);
-		add(panneauTitre, BorderLayout.NORTH);
+		add(panneauTitre);*/
+		
+		labelObliger = new JLabel(" Obligatoire  : * "); 
+		add(labelObliger);
 		
 		// IdInstallation
 		labelIdInstallation = new JLabel("Id Installation  : "); 
+		labelIdInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		zoneTexteIdInstallation = new JTextField(5); 
 		zoneTexteIdInstallation.setEnabled(false);
 		
 		RécupérerIdInstallation(connection);
 		
 		//Date
-		labelDateInstallation = new JLabel("Date d'installation  : "); 
+		labelDateInstallation = new JLabel("* Date d'installation  : "); 
+		labelDateInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		panneauDateInstallation = new ComboxDate();
-
 		
 		//Type d'installation : booléen précisant si installation standard ou personnalisée 
-		labelTypeInstallation = new JLabel("Type d'installation  : "); 
+		labelTypeInstallation = new JLabel("* Type d'installation  : "); 
+		labelTypeInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		comboBoxTypeInstallation = new JComboBox<String>(listeTypeBool);
 	
 		//Commentaires PAS OBLIGATOIRE
 		labelCommentaires = new JLabel("Commentaire  : "); 
+		labelCommentaires.setHorizontalAlignment(SwingConstants.RIGHT);
 		zoneTexteCommentaires = new JTextField(25); 
 
 		
 		//Duree Installation PAS OBLIGATOIRE
-		labelDureeInstallation = new JLabel("Durée Installation  : "); 
+		labelDureeInstallation = new JLabel("* Durée Installation  : "); 
+		labelDureeInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		modelSpinner = new SpinnerNumberModel(0,0,999,1);
 		spinnerDureeInstallation = new JSpinner(modelSpinner);
 		spinnerDureeInstallation.setEditor(new JSpinner.DefaultEditor(spinnerDureeInstallation));
 		
 		//RefProcedureInstallation 
 		labelRefProcedureInstallation = new JLabel("Ref Procedure Installation  : "); 
+		labelRefProcedureInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		zoneTextRefProcedureInstallation = new JTextField(25); 
 		
 		//Validation  
-		labelValidation = new JLabel("Validation : "); 
+		labelValidation = new JLabel("* Validation : "); 
+		labelValidation.setHorizontalAlignment(SwingConstants.RIGHT);
 		boutonAPrevoir = new JRadioButton("A prevoir",false); 
 		boutonTerminee = new JRadioButton("Terminée",false); 
 		boutonEnCours = new JRadioButton("En cours",false); 
@@ -100,16 +104,20 @@ public class NouvelleInstallation extends JPanel {
 
 		//DateValidation PAS OBLIGATOIRE UNIQUEMENT SI VALIDATION EST A PREVOIR
 		labelDateValidation = new JLabel("Date Validation : "); 
+		labelDateValidation.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelDateValidation.setVisible(false);	
 		panneauDateAPrevoir = new ComboxDate();
 		panneauDateAPrevoir.setVisible(false);
 		
 		//Software  Matricule Os
-		labelSoftware = new JLabel("Software  : "); 
+		labelSoftware = new JLabel("* Software  : ");
+		labelSoftware.setHorizontalAlignment(SwingConstants.RIGHT);
 		comboxSoftware = new JComboBox<String>();
-		labelMatricule = new JLabel("Matricule  : "); 
+		labelMatricule = new JLabel("* Matricule  : "); 
+		labelMatricule.setHorizontalAlignment(SwingConstants.RIGHT);
 		comboxMatricule = new JComboBox<String>();
-		labelOS = new JLabel("OS : "); 
+		labelOS = new JLabel("* OS : "); 
+		labelOS.setHorizontalAlignment(SwingConstants.RIGHT);
 		comboxOS = new JComboBox<String>();
 		
 		RécupérerSoftwareMatriculeOs(connection);		
@@ -117,7 +125,7 @@ public class NouvelleInstallation extends JPanel {
 		
 		//panneauFormulaire
 		panneauFormulaire = new JPanel( );     
-		panneauFormulaire.setLayout(new GridLayout( 11, 2, 0, 0 ));
+		panneauFormulaire.setLayout(new GridLayout( 11, 2, 20, 10 ));
 		panneauFormulaire.add(labelIdInstallation); 
 		panneauFormulaire.add(zoneTexteIdInstallation); 
 		panneauFormulaire.add(labelDateInstallation); 
@@ -140,12 +148,11 @@ public class NouvelleInstallation extends JPanel {
 		panneauFormulaire.add(comboxMatricule); 
 		panneauFormulaire.add(labelOS); 
 		panneauFormulaire.add(comboxOS); 
-		add(panneauFormulaire,BorderLayout.CENTER);
+		add(panneauFormulaire);
 		
 		//Bouton
 		BoutonInsertion boutonInsertion = new BoutonInsertion(this,connection);
 		add(boutonInsertion);
-		
 		
 		
 		//Ajout réussi
@@ -154,9 +161,9 @@ public class NouvelleInstallation extends JPanel {
 		labelAjoutReussi.setForeground(Color.red);
 		panneauAjoutReussi.setLayout(new GridLayout( 1, 1, 0, 0 ));
 		panneauAjoutReussi.add(labelAjoutReussi);
-		add(panneauAjoutReussi, BorderLayout.SOUTH);
+		add(panneauAjoutReussi);
 		panneauAjoutReussi.setVisible(false);
-		
+
 		setVisible(true);
 	}
 	
@@ -176,9 +183,9 @@ public class NouvelleInstallation extends JPanel {
 	
 	private void RécupérerSoftwareMatriculeOs(Connection connection) {
 		try {
-			PreparedStatement prepStatSoftware = connection.prepareStatement("SELECT Nom FROM Software;");
-			PreparedStatement prepStatMatricule = connection.prepareStatement("SELECT NomPrenom FROM ResponsableReseaux;");
-			PreparedStatement prepStatOS = connection.prepareStatement("SELECT Libelle FROM OS;");
+			PreparedStatement prepStatSoftware = connection.prepareStatement("select Nom from Software;");
+			PreparedStatement prepStatMatricule = connection.prepareStatement("select NomPrenom from ResponsableReseaux;");
+			PreparedStatement prepStatOS = connection.prepareStatement("select Libelle from OS;");
 			TableModelGen tableSoftware = AccessBDGen.creerTableModel(prepStatSoftware);
 			TableModelGen tableMatricule = AccessBDGen.creerTableModel(prepStatMatricule);
 			TableModelGen tableOS = AccessBDGen.creerTableModel(prepStatOS);
