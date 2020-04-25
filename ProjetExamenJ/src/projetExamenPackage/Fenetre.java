@@ -2,6 +2,7 @@ package projetExamenPackage;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.*;
 import java.sql.*;
 import javax.swing.*;
 import accessBD.*;
@@ -14,8 +15,8 @@ public class Fenetre extends JFrame {
 	private JLabel message;
 	private JMenuBar menuBarre;
 	private JMenu menuApplication, menuBaseDeDonnée, menuAide; 
-	private JMenuItem menuItemAccueil,menuItemQuitter, menuItemNouvelleInstallation, menuItemLectureTable, menuItemSoftwaresAcquisDate, menuItemSoftwareProfesseur, menuItemSupprimerUneInstallation, menuItemCommentaire, menuItemPropos; 
-
+	private JMenuItem menuItemAccueil,menuItemQuitter, menuItemNouvelleInstallation, menuItemLectureTable, menuItemSoftwaresAcquisDate, menuItemSoftwareProfesseur, menuItemSupprimerUneInstallation, menuItemGitHub, menuItemPropos; 
+	private Desktop bureau = Desktop.getDesktop();
 	
 	public Fenetre(Login loginConect) {
 		
@@ -82,10 +83,10 @@ public class Fenetre extends JFrame {
 		MenuActionSupprimerInstallation actionSupprimerInstallation = new MenuActionSupprimerInstallation();    
 		menuItemSupprimerUneInstallation.addActionListener(actionSupprimerInstallation);
 		
-		menuItemCommentaire = new JMenuItem("Commentaire"); 
-		menuAide.add(menuItemCommentaire);
-		menuActionCommentaire actionCommentaire = new menuActionCommentaire();    
-		menuItemCommentaire.addActionListener(actionCommentaire); 
+		menuItemGitHub = new JMenuItem("GitHub du logiciel"); 
+		menuAide.add(menuItemGitHub);
+		menuActionGitHub actionGitHub = new menuActionGitHub();    
+		menuItemGitHub.addActionListener(actionGitHub); 
 		
 		menuAide.addSeparator(); 
 		
@@ -143,8 +144,8 @@ public class Fenetre extends JFrame {
 			add(nouvelleInstallation);
 			nouvelleInstallation.repaint();
 			Fenetre.this.setVisible(true);
-		
-		}}
+		}
+	}
 	
 	
 	private class MenuActionSupprimerInstallation implements ActionListener {
@@ -154,7 +155,8 @@ public class Fenetre extends JFrame {
 			add(suppression);
 			suppression.repaint();
 			Fenetre.this.setVisible(true);
-		}}
+		}
+	}
 	
 	
 	private class MenuActionLectureTable implements ActionListener {
@@ -164,8 +166,8 @@ public class Fenetre extends JFrame {
 			add(afficherLesTables);
 			afficherLesTables.repaint();
 			Fenetre.this.setVisible(true);
-
-		}}
+		}
+	}
 	
 	private class MenuActionSoftwaresAcquisDate implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
@@ -174,8 +176,8 @@ public class Fenetre extends JFrame {
 			add(softwaresAcquisDate);
 			softwaresAcquisDate.repaint();
 			Fenetre.this.setVisible(true);
-
-		}}
+		}
+	}
 	
 	private class MenuActionSoftwareProfesseur implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
@@ -184,18 +186,25 @@ public class Fenetre extends JFrame {
 			add(softwareProfesseur);
 			softwareProfesseur.repaint();
 			Fenetre.this.setVisible(true);
-		}}
+		}
+	}
 	
-	private class menuActionCommentaire implements ActionListener {
-		public void  actionPerformed(ActionEvent e)  {
-			
-		}} 
-	
+	private class menuActionGitHub implements ActionListener {
+        public void  actionPerformed(ActionEvent e)  {
+            try {
+                bureau.browse(new URI("https://github.com/LeigerMax/ProjetExamenJava"));
+                } 
+            catch (Exception o) {
+                o.printStackTrace();
+                }
+        }
+    }
 	
 	private class menuActionPropos implements ActionListener {
 		public void  actionPerformed(ActionEvent e)  {
 			APropos propos = new APropos();
-		}} 
+		}
+	} 
 
 	public Connection getConnect() {
 		return connection;
