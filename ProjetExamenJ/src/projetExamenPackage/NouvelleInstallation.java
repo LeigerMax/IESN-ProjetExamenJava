@@ -18,10 +18,10 @@ public class NouvelleInstallation extends JPanel {
 	private JSpinner spinnerDureeInstallation;
 	private SpinnerNumberModel modelSpinner;
 	private JRadioButton boutonAPrevoir, boutonTerminee,boutonEnCours; 
-	private JPanel panneauTitre, panneauFormulaire, panneauValidation, panneauAjoutReussi; 
+	private JPanel panneauTitre, panneauFormulaire, panneauValidation; 
 	private ButtonGroup boutonGroupe; 
 	private String SqlInto;
-	private String choixBouton;
+	private String choixBouton = "Terminée";
 	private ComboxDate panneauDateInstallation,panneauDateAPrevoir;
 
 	
@@ -31,18 +31,17 @@ public class NouvelleInstallation extends JPanel {
 		
 		//Titre
 		labelTitre = new JLabel("Nouvelle installation : "); 
-		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,16));
-		add(labelTitre);
+		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,30));
+		labelObliger = new JLabel("Obligatoire  : * "); 
+		labelObliger.setFont(new java.awt.Font(Font.SERIF,Font.ITALIC,15));
 		
-		
-		/*panneauTitre = new JPanel( );     
-		panneauTitre.setLayout(new GridLayout( 1, 1, 0, 0 ));
+		panneauTitre = new JPanel( );     
+		panneauTitre.setLayout(new GridLayout( 2, 1, 0, 0 ));
 		panneauTitre.add(labelTitre);
-		add(panneauTitre);*/
+		panneauTitre.add(labelObliger);
+		add(panneauTitre);
 		
-		labelObliger = new JLabel(" Obligatoire  : * "); 
-		add(labelObliger);
-		
+
 		// IdInstallation
 		labelIdInstallation = new JLabel("Id Installation  : "); 
 		labelIdInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -83,7 +82,7 @@ public class NouvelleInstallation extends JPanel {
 		labelValidation = new JLabel("* Validation : "); 
 		labelValidation.setHorizontalAlignment(SwingConstants.RIGHT);
 		boutonAPrevoir = new JRadioButton("A prevoir",false); 
-		boutonTerminee = new JRadioButton("Terminée",false); 
+		boutonTerminee = new JRadioButton("Terminée",true); 
 		boutonEnCours = new JRadioButton("En cours",false); 
 
 		boutonGroupe = new ButtonGroup();
@@ -122,10 +121,20 @@ public class NouvelleInstallation extends JPanel {
 		
 		RécupérerSoftwareMatriculeOs(connection);		
 
+		//Bouton
+		BoutonInsertion boutonInsertion = new BoutonInsertion(this,connection);
+		//add(boutonInsertion);
+		
+		
+		//Ajout réussi
+		labelAjoutReussi = new JLabel("Ajout réussi ! "); 
+		labelAjoutReussi.setForeground(Color.red);
+		labelAjoutReussi.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelAjoutReussi.setVisible(false);
 		
 		//panneauFormulaire
 		panneauFormulaire = new JPanel( );     
-		panneauFormulaire.setLayout(new GridLayout( 11, 2, 20, 10 ));
+		panneauFormulaire.setLayout(new GridLayout( 12, 2, 10, 1 ));
 		panneauFormulaire.add(labelIdInstallation); 
 		panneauFormulaire.add(zoneTexteIdInstallation); 
 		panneauFormulaire.add(labelDateInstallation); 
@@ -148,21 +157,10 @@ public class NouvelleInstallation extends JPanel {
 		panneauFormulaire.add(comboxMatricule); 
 		panneauFormulaire.add(labelOS); 
 		panneauFormulaire.add(comboxOS); 
+		panneauFormulaire.add(labelAjoutReussi); 
+		panneauFormulaire.add(boutonInsertion); 
 		add(panneauFormulaire);
 		
-		//Bouton
-		BoutonInsertion boutonInsertion = new BoutonInsertion(this,connection);
-		add(boutonInsertion);
-		
-		
-		//Ajout réussi
-		labelAjoutReussi = new JLabel("Ajout réussi ! "); 
-		panneauAjoutReussi = new JPanel( );   
-		labelAjoutReussi.setForeground(Color.red);
-		panneauAjoutReussi.setLayout(new GridLayout( 1, 1, 0, 0 ));
-		panneauAjoutReussi.add(labelAjoutReussi);
-		add(panneauAjoutReussi);
-		panneauAjoutReussi.setVisible(false);
 
 		setVisible(true);
 	}
@@ -178,7 +176,8 @@ public class NouvelleInstallation extends JPanel {
 			}
 		catch(SQLException e) {
 			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-		}}
+		}
+	}
 	
 	
 	private void RécupérerSoftwareMatriculeOs(Connection connection) {
@@ -201,8 +200,8 @@ public class NouvelleInstallation extends JPanel {
 			}
 		catch(SQLException e) {
 			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-		}}
-	
+		}
+	}
 
 	
 	private class ItemRadioValidation implements ItemListener { 
@@ -222,8 +221,8 @@ public class NouvelleInstallation extends JPanel {
 				 labelDateValidation.setVisible(false);
 				 choixBouton = "En cours";
 				}
-		 }} 
-	
+		 }
+	} 
 
 		
 	public void AjoutNouvelleInstallation(Connection connection) {
@@ -283,7 +282,6 @@ public class NouvelleInstallation extends JPanel {
 				myPrepStat.setNull(8, Types.DATE);
 			}
 
-
 			
 			//Software
 			if(comboxSoftware.getSelectedItem().equals("Bob50")) {
@@ -340,13 +338,14 @@ public class NouvelleInstallation extends JPanel {
 			
 			myPrepStat.executeUpdate();
 			
-			panneauAjoutReussi.setVisible(true);
+			labelAjoutReussi.setVisible(true);
 			réinitialiser(connection);
 			
 		}
 		catch(SQLException e) {
 			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-		}}
+		}
+	}
 	
 	public void réinitialiser(Connection connection) {
 		zoneTexteCommentaires.setText("");
