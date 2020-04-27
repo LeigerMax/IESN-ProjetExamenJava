@@ -12,6 +12,7 @@ public class Suppression extends JPanel {
 	private JComboBox<String> comboFamilleSoft;
 	private Fenetre parent;
 	private String SqlSelectFrom;
+	private AfficherUneTable afficherLaTable;
 	
 	public  Suppression(Connection connection, Fenetre fenetre) {
 		setLayout(null);
@@ -46,17 +47,17 @@ public class Suppression extends JPanel {
 		//Bouton supprimer
 		boutonSupprimerInstall = new JButton("SUPPRIMER");
 		boutonSupprimerInstall.setBounds(580, 60, 110, 30);
-		//ActionSupprimer actionSupprimer = new ActionSupprimer();
-		//boutonSupprimerInstall.addActionListener(actionSupprimer);
+		ActionSupprimer actionSupprimer = new ActionSupprimer();
+		boutonSupprimerInstall.addActionListener(actionSupprimer);
 		add(boutonSupprimerInstall);
 		
-		RécupérerNomsTableau(connection);
+		RÃ©cupÃ©rerNomsTableau(connection);
 
 
 		setVisible(true);
 	}
 	
-	private void RécupérerNomsTableau(Connection connection) {
+	private void RÃ©cupÃ©rerNomsTableau(Connection connection) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement("SELECT libelle FROM familleSoftware;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
@@ -72,10 +73,10 @@ public class Suppression extends JPanel {
 	
 	public class ActionBoutonAfficher implements ActionListener{
 		public void actionPerformed(ActionEvent a) {
-			SqlSelectFrom = "SELECT *  FROM installation JOIN software ON installation.CodeSoftware = software.CodeSoftware JOIN famillesoftware ON software.IdFamSoft = famillesoftware.IdFamSoft WHERE famillesoftware.libelle LIKE '"+(String)comboFamilleSoft.getSelectedItem()+"' AND DureeInstallation < 120;";
-			AfficherUneTable afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
+			SqlSelectFrom = "SELECT * FROM installation WHERE DureeInstallation < 120 AND CodeSoftware IN (SELECT CodeSoftware FROM software WHERE IdFamSoft = (SELECT IdFamSoft FROM famillesoftware WHERE libelle LIKE '"+(String)familleSoft.getSelectedItem()+"'));";
+			afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 			
-			removeAll();
+			//removeAll();
 			add(labelTitre);
 			add(comboFamilleSoft);
 			add(boutonAfficherInstall);
@@ -87,20 +88,30 @@ public class Suppression extends JPanel {
 	}
 	
 	public class ActionBoutonSupprimer implements ActionListener{
-		public void actionPerformed(ActionEvent b) {
-			//Pas correct
-			SqlSelectFrom = "DELETE * FROM" + (String)comboFamilleSoft.getSelectedItem()+";";
-			AfficherUneTable afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
-			
-			removeAll();
-			
-			add(labelTitre);
-			add(comboFamilleSoft);
-			add(boutonAfficherInstall);
-			add(boutonSupprimerInstall);
-			afficherLaTable.setBounds(5, 100, 775, 400);
-			add(afficherLaTable);
-			validate();
+		public void actionPerformed(ActionEvent b){
+			int choix;
+			try {
+				choix = JOptionPane.showConfirmDialog(null, new JPanel(), "CONFIRMATION", JOptionPane.YES_NO_OPTION);
+
+				if(choix == 0) {
+					int[] SelectedRows=afficherLaTable.getTable().getSelectedRows();
+					if(SelectedRows.length > 0 ) {
+						for(int i=0;i<SelectedRows.length;i++) {
+							int a = ((Integer)afficherLaTable.getTable().getModel().getValueAt(i, 0)).intValue();
+						
+							SqlSelectFrom = "DELETE FROM installation WHERE IdInstallation = "+a+";";
+							Statement stmt=parent.getConnect().createStatement();
+							stmt.executeUpdate(SqlSelectFrom);
+						}	
+					
+					}else {
+					JOptionPane.showMessageDialog(null,"SÃ©lectionnez une installation",null, JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
