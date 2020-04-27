@@ -25,7 +25,7 @@ public class Login extends JPanel {
 		labelTitre.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
 		add(labelTitre); 
 		labelTitre.setBounds(100,20,255,50); 
-		labelDemandeConnexion = new JLabel("Merci de vous connecter pour accéder à l'application"); 
+		labelDemandeConnexion = new JLabel("Merci de vous connecter pour accÃ©der Ã  l'application"); 
 		add(labelDemandeConnexion); 
 		labelDemandeConnexion.setBounds(100,50,400,50); 
 		
@@ -35,7 +35,7 @@ public class Login extends JPanel {
 		labelLogin.setBounds(100,100,150,50); 
 		zoneTextelogin = new  JTextField();
 		add(zoneTextelogin); 
-		zoneTextelogin.setBounds(100,150,300,50); 
+		zoneTextelogin.setBounds(100,150,300,30); 
 		
 		//Password
 		labelPassword = new JLabel("Mot de passe :");
@@ -43,12 +43,13 @@ public class Login extends JPanel {
 		labelPassword.setBounds(100,200,500,50); 
 		zoneTextePassword = new JPasswordField();
 		add(zoneTextePassword); 
-		zoneTextePassword.setBounds(100,250,300,50); 
+		zoneTextePassword.setBounds(100,250,300,30); 
 		
 		//Bouton
 		boutonLogin = new JButton(" Login "); 
 		add(boutonLogin); 
-		boutonLogin.setBounds(100,320,150,50); 
+		boutonLogin.setBounds(100,320,120,40);
+		boutonLogin.setBackground(Color.LIGHT_GRAY);
 		ActionBoutonLogin actionBoutonLogin = new ActionBoutonLogin();
 		boutonLogin.addActionListener(actionBoutonLogin);
 		
@@ -63,7 +64,7 @@ public class Login extends JPanel {
 			if(a.getSource()==boutonLogin) {
 				try {
 					connection = AccessBDGen.connecter("DbInstallations", "root","Tigrou007");
-					JOptionPane.showMessageDialog(null,"Connexion réussie", "Connecter", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Connexion rÃ©ussie", "Connecter", JOptionPane.INFORMATION_MESSAGE);
 					Fenetre fenetrePrincipal = new Fenetre(loginConnect);
 					loginFenetre.dispose();
 				}
