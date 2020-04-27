@@ -76,7 +76,7 @@ public class Suppression extends JPanel {
 			SqlSelectFrom = "SELECT * FROM installation WHERE DureeInstallation < 120 AND CodeSoftware IN (SELECT CodeSoftware FROM software WHERE IdFamSoft = (SELECT IdFamSoft FROM famillesoftware WHERE libelle LIKE '"+(String)familleSoft.getSelectedItem()+"'));";
 			afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 			
-			//removeAll();
+			removeAll();
 			add(labelTitre);
 			add(comboFamilleSoft);
 			add(boutonAfficherInstall);
@@ -89,7 +89,9 @@ public class Suppression extends JPanel {
 	
 	public class ActionBoutonSupprimer implements ActionListener{
 		public void actionPerformed(ActionEvent b){
-			int choix;
+			int choix=0;
+			String SelectInstallation = "SELECT * FROM installation WHERE DureeInstallation < 120 AND CodeSoftware IN (SELECT CodeSoftware FROM software WHERE IdFamSoft = (SELECT IdFamSoft FROM famillesoftware WHERE libelle LIKE '"+(String)comboFamilleSoft.getSelectedItem()+"'));";
+  
 			try {
 				choix = JOptionPane.showConfirmDialog(null, new JPanel(), "CONFIRMATION", JOptionPane.YES_NO_OPTION);
 
@@ -97,15 +99,22 @@ public class Suppression extends JPanel {
 					int[] SelectedRows=afficherLaTable.getTable().getSelectedRows();
 					if(SelectedRows.length > 0 ) {
 						for(int i=0;i<SelectedRows.length;i++) {
-							int a = ((Integer)afficherLaTable.getTable().getModel().getValueAt(i, 0)).intValue();
-						
-							SqlSelectFrom = "DELETE FROM installation WHERE IdInstallation = "+a+";";
+							int idInstallation = ((Integer)afficherLaTable.getTable().getModel().getValueAt(SelectedRows[i],0)).intValue();	
+				            		String deleteInstallaion = "DELETE FROM installation WHERE IdInstallation = "+idInstallation+";";
+
 							Statement stmt=parent.getConnect().createStatement();
-							stmt.executeUpdate(SqlSelectFrom);
-						}	
-					
+							stmt.executeUpdate(deleteInstallaion);
+						}
+						afficherLaTable = new AfficherUneTable(parent.getConnect(), SelectInstallation);
+						add(labelTitre);
+						add(comboFamilleSoft);
+						add(boutonAfficherInstall);
+						add(boutonSupprimerInstall);
+						afficherLaTable.setBounds(5, 100, 775, 400);
+						add(afficherLaTable);
+						validate();
 					}else {
-					JOptionPane.showMessageDialog(null,"Sélectionnez une installation",null, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Veillez sélectionner une installation",null, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -114,5 +123,4 @@ public class Suppression extends JPanel {
 			}
 		}
 	}
-
 }
