@@ -47,17 +47,17 @@ public class Suppression extends JPanel {
 		//Bouton supprimer
 		boutonSupprimerInstall = new JButton("SUPPRIMER");
 		boutonSupprimerInstall.setBounds(580, 60, 110, 30);
-		ActionSupprimer actionSupprimer = new ActionSupprimer();
+		ActionBoutonSupprimer actionSupprimer = new ActionBoutonSupprimer();
 		boutonSupprimerInstall.addActionListener(actionSupprimer);
 		add(boutonSupprimerInstall);
 		
-		RÃ©cupÃ©rerNomsTableau(connection);
+		RécupérerNomsTableau(connection);
 
 
 		setVisible(true);
 	}
 	
-	private void RÃ©cupÃ©rerNomsTableau(Connection connection) {
+	private void RécupérerNomsTableau(Connection connection) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement("SELECT libelle FROM familleSoftware;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
@@ -73,7 +73,7 @@ public class Suppression extends JPanel {
 	
 	public class ActionBoutonAfficher implements ActionListener{
 		public void actionPerformed(ActionEvent a) {
-			SqlSelectFrom = "SELECT * FROM installation WHERE DureeInstallation < 120 AND CodeSoftware IN (SELECT CodeSoftware FROM software WHERE IdFamSoft = (SELECT IdFamSoft FROM famillesoftware WHERE libelle LIKE '"+(String)familleSoft.getSelectedItem()+"'));";
+			SqlSelectFrom = "SELECT * FROM installation WHERE DureeInstallation < 120 AND CodeSoftware IN (SELECT CodeSoftware FROM software WHERE IdFamSoft = (SELECT IdFamSoft FROM famillesoftware WHERE libelle LIKE '"+(String)comboFamilleSoft.getSelectedItem()+"'));";
 			afficherLaTable = new AfficherUneTable(parent.getConnect(), SqlSelectFrom);
 			
 			removeAll();
