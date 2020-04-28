@@ -15,6 +15,7 @@ public class APropos extends JFrame {
 	
 	public APropos() {
         super("A propos");
+        setResizable(false);
         setBounds(500,200,400,200);
         
         //Texte 1
