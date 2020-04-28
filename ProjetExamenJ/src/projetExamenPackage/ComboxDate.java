@@ -26,7 +26,7 @@ public class ComboxDate extends JPanel {
 			année.addItem(annéeI);
 		}
 		for(int jourI=1;jourI<=31;jourI++) {
-			jour.addItem(jourI);
+			jour.addItem(jourI); 
 		}
 		
 		add(année);
