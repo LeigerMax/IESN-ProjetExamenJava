@@ -90,17 +90,17 @@ public class Suppression extends JPanel {
 	public class ActionBoutonSupprimer implements ActionListener{
 		public void actionPerformed(ActionEvent b){
 			int choix=0;
-			String SelectInstallation = "SELECT * FROM installation WHERE DureeInstallation < 120 AND CodeSoftware IN (SELECT CodeSoftware FROM software WHERE IdFamSoft = (SELECT IdFamSoft FROM famillesoftware WHERE libelle LIKE '"+(String)comboFamilleSoft.getSelectedItem()+"'));";
+			String SelectInstallation = "select * from installation where DureeInstallation < 120 and CodeSoftware in (select CodeSoftware from software where IdFamSoft = (select IdFamSoft from famillesoftware where libelle like '"+(String)comboFamilleSoft.getSelectedItem()+"'));";
   
 			try {
-				choix = JOptionPane.showConfirmDialog(null, new JPanel(), "CONFIRMATION", JOptionPane.YES_NO_OPTION);
+				choix = JOptionPane.showConfirmDialog(null, "Confirmer ?", "CONFIRMATION", JOptionPane.YES_NO_OPTION);
 
 				if(choix == 0) {
 					int[] SelectedRows=afficherLaTable.getTable().getSelectedRows();
 					if(SelectedRows.length > 0 ) {
 						for(int i=0;i<SelectedRows.length;i++) {
 							int idInstallation = ((Integer)afficherLaTable.getTable().getModel().getValueAt(SelectedRows[i],0)).intValue();	
-				            		String deleteInstallaion = "DELETE FROM installation WHERE IdInstallation = "+idInstallation+";";
+				            		String deleteInstallaion = "delete from installation where IdInstallation = "+idInstallation+";";
 
 							Statement stmt=parent.getConnect().createStatement();
 							stmt.executeUpdate(deleteInstallaion);
@@ -114,7 +114,7 @@ public class Suppression extends JPanel {
 						add(afficherLaTable);
 						validate();
 					}else {
-					JOptionPane.showMessageDialog(null,"Veillez sÃ©lectionner une installation",null, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Veillez sélectionner une installation",null, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
