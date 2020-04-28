@@ -59,7 +59,7 @@ public class AfficherLesTables extends JPanel{
 	
 	private class ActionAfficherTable implements ActionListener{
 		public void actionPerformed(ActionEvent a){
-			SqlSelectFrom = "SELECT * FROM "+(String)comboChoix.getSelectedItem()+";";
+			SqlSelectFrom = "select * from "+(String)comboChoix.getSelectedItem()+";";
 			AfficherUneTable afficherLaTable  = new AfficherUneTable(fenetreParent.getConnect(), SqlSelectFrom);
 
 			removeAll();
