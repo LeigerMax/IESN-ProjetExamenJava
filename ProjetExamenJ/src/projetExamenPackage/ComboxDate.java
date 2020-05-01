@@ -17,7 +17,6 @@ public class ComboxDate extends JPanel {
 	
 	public ComboxDate() {
 		setLayout(new GridLayout(1,3,1,1));
-		
 		jour = new JComboBox<Integer>();
 		mois = new JComboBox<String>(listeMois);
 		année = new JComboBox<Integer>();
@@ -44,6 +43,9 @@ public class ComboxDate extends JPanel {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			
+			System.out.println(dateJava);
+
 			return dateJava;
 		}
 		

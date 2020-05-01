@@ -68,7 +68,7 @@ public class NouvelleInstallation extends JPanel {
 		//Duree Installation PAS OBLIGATOIRE
 		labelDureeInstallation = new JLabel("* Durée Installation  : "); 
 		labelDureeInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
-		modelSpinner = new SpinnerNumberModel(0,0,999,1);
+		modelSpinner = new SpinnerNumberModel(0,0,86400,1);
 		spinnerDureeInstallation = new JSpinner(modelSpinner);
 		spinnerDureeInstallation.setEditor(new JSpinner.DefaultEditor(spinnerDureeInstallation));
 		
