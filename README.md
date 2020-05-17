@@ -4,17 +4,24 @@ Projet examen de java 2020
 ## AfficherLesTables
 Permet de lister le contenu d'une table choisie par l'utilisateur.
 
+La méthode ***RécupérerNomsTableau*** permet de chercher les noms des tableaux et d'afficher ceci dans la comboChoix.
+La méthode ***ActionAfficherTable*** permet de faire appel à la classe AfficherUneTable afin d'afficher le tableau choisi par l'utilisateur.
+
 ## AfficherUneTable
 Cette classe permet l'affichage d'un tableau.
+
+La Jtable sera placée dans un JScrollPane afin d'éviter des risques d'affichage. On affiche donc le JScollPane contenant la Jtable au container.
 
 ## APropos
 La classe APropos permet de faire apparaitre une petite fenêtre à l'utilisateur, cette fenêtre contient des informations sur le programme et ses créateurs.
 
+Des boutons sont disponibles afin d'envoyer l'utilisateur vers le compte github des développeurs.
+
 ## BoutonAnnulation
-Cette classe permet de crer un bouton et de faire appel à la méthode ActionAnnulation qui permet d'annuler l'ajout d'une nouvelle installation lorsque ce bouton est appuyé. 
+Cette classe permet de créer un bouton et de faire appel à la méthode ActionAnnulation qui permet d'annuler l'ajout d'une nouvelle installation lorsque ce bouton est appuyé. 
 
 ## BoutonInsertion
-Cette classe permet de crer un bouton et de faire appel à la méthode AjoutNouvelleInstallation qui permet d'd'ajouter nouvelle installation.
+Cette classe permet de créer un bouton et de faire appel à la méthode AjoutNouvelleInstallation qui permet d'd'ajouter nouvelle installation.
 
 ## ComboxDate
 Cette classe sert à gérer les combox Date.
