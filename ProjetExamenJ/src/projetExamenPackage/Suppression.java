@@ -51,13 +51,13 @@ public class Suppression extends JPanel {
 		boutonSupprimerInstall.addActionListener(actionSupprimer);
 		add(boutonSupprimerInstall);
 		
-		RécupérerNomsTableau(connection);
+		RÃ©cupÃ©rerNomsTableau(connection);
 
 
 		setVisible(true);
 	}
 	
-	private void RécupérerNomsTableau(Connection connection) {
+	private void RÃ©cupÃ©rerNomsTableau(Connection connection) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement("SELECT libelle FROM familleSoftware;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
@@ -93,7 +93,7 @@ public class Suppression extends JPanel {
 			String SelectInstallation = "select * from installation where DureeInstallation < 120 and CodeSoftware in (select CodeSoftware from software where IdFamSoft = (select IdFamSoft from famillesoftware where libelle like '"+(String)comboFamilleSoft.getSelectedItem()+"'));";
   
 			try {
-				choix = JOptionPane.showConfirmDialog(null, "Confirmer ?", "CONFIRMATION", JOptionPane.YES_NO_OPTION);
+				choix = JOptionPane.showConfirmDialog(null, new JPanel(), "CONFIRMATION", JOptionPane.YES_NO_OPTION);
 
 				if(choix == 0) {
 					int[] SelectedRows=afficherLaTable.getTable().getSelectedRows();
@@ -116,7 +116,7 @@ public class Suppression extends JPanel {
 						add(afficherLaTable);
 						validate();
 					}else {
-					JOptionPane.showMessageDialog(null,"Veillez sélectionner une installation",null, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Veillez sÃ©lectionner une installation",null, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
