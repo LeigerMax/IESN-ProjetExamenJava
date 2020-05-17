@@ -380,7 +380,7 @@ public class NouvelleInstallation extends JPanel {
 			}
 		}
 		catch(SQLException e) {
-			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+			//JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
