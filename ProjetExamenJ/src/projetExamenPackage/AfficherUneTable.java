@@ -18,7 +18,7 @@ public class AfficherUneTable extends JPanel {
 			jTable = new JTable(table);
 			jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Obtenir un meilleur affiche des tableaux
 			jTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Permettre à l'user de ne sélectionner qu'une seule ligne
-			JScrollPane defilant = new JScrollPane (jTable) ;
+			JScrollPane defilant = new JScrollPane (jTable) ; //Ajoute defilant au conteneur afin de l'afficher
 		 	defilant.setPreferredSize(new Dimension(775, 400));
 		 	this.add(defilant);
 			}
