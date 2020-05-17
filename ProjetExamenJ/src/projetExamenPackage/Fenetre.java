@@ -14,7 +14,7 @@ public class Fenetre extends JFrame {
 	private Container cont;
 	private JLabel message;
 	private JMenuBar menuBarre;
-	private JMenu menuApplication, menuBaseDeDonnée, menuAide; 
+	private JMenu menuApplication, menuBaseDeDonnÃ©e, menuAide; 
 	private JMenuItem menuItemAccueil,menuItemQuitter, menuItemNouvelleInstallation, menuItemLectureTable, menuItemSoftwaresAcquisDate, menuItemSoftwareProfesseur, menuItemSupprimerUneInstallation, menuItemGitHub, menuItemPropos; 
 	private Desktop bureau = Desktop.getDesktop();
 	
@@ -23,11 +23,11 @@ public class Fenetre extends JFrame {
 		super("Examen Java ");
 	    setBounds(500,200,800,600);
 	    setResizable(false);
-	    this.loginConect=loginConect;   
+	   // this.loginConect=loginConect;   
 	    connection=loginConect.getConnect();
 	
 		//Message de bienvenue
-		message = new JLabel("Bienvenue dans l'application réalisée pour le cour de Java 2");
+		message = new JLabel("Bienvenue dans l'application rÃ©alisÃ©e pour le cour de Java 2");
 		message.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
 		message.setHorizontalAlignment(SwingConstants.CENTER);
 		add(message);
@@ -39,18 +39,18 @@ public class Fenetre extends JFrame {
 		//JMenu
 		menuApplication = new JMenu("Application");
 		menuBarre.add(menuApplication);
-		menuBaseDeDonnée = new JMenu("Base de donnée");
-		menuBarre.add(menuBaseDeDonnée);
+		menuBaseDeDonnÃ©e = new JMenu("Base de donnÃ©e");
+		menuBarre.add(menuBaseDeDonnÃ©e);
 		menuAide = new JMenu("Aide");
 		menuBarre.add(menuAide);
 
 		
 		//JMenuItem
-		menuItemAccueil = new JMenuItem("Déconnexion");
+		menuItemAccueil = new JMenuItem("DÃ©connexion");
 		menuItemAccueil.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,InputEvent.CTRL_MASK));
 		menuApplication.add(menuItemAccueil);
-		menuActionDéconnexion actionDéconnexion = new menuActionDéconnexion();    
-		menuItemAccueil.addActionListener(actionDéconnexion);
+		menuActionDÃ©connexion actionDÃ©connexion = new menuActionDÃ©connexion();    
+		menuItemAccueil.addActionListener(actionDÃ©connexion);
 		
 		menuItemQuitter = new JMenuItem("Sortie");
 		menuItemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,InputEvent.CTRL_MASK));
@@ -59,27 +59,27 @@ public class Fenetre extends JFrame {
 		menuItemQuitter.addActionListener(actionQuitter);
 		
 		menuItemNouvelleInstallation = new JMenuItem("Nouvelle Installation"); 
-		menuBaseDeDonnée.add(menuItemNouvelleInstallation);
+		menuBaseDeDonnÃ©e.add(menuItemNouvelleInstallation);
 		MenuActionNouvelleInstallation actionNouvelleInstallation = new MenuActionNouvelleInstallation();    
 		menuItemNouvelleInstallation.addActionListener(actionNouvelleInstallation);
 		
 		menuItemLectureTable = new JMenuItem("Lecture des tables"); 
-		menuBaseDeDonnée.add(menuItemLectureTable);
+		menuBaseDeDonnÃ©e.add(menuItemLectureTable);
 		MenuActionLectureTable actionLectureTable = new MenuActionLectureTable();    
 		menuItemLectureTable.addActionListener(actionLectureTable);
 		
 		menuItemSoftwaresAcquisDate = new JMenuItem("Softwares Acquis Date"); 
-		menuBaseDeDonnée.add(menuItemSoftwaresAcquisDate);
+		menuBaseDeDonnÃ©e.add(menuItemSoftwaresAcquisDate);
 		MenuActionSoftwaresAcquisDate actionSoftwaresAcquisDate = new MenuActionSoftwaresAcquisDate();    
 		menuItemSoftwaresAcquisDate.addActionListener(actionSoftwaresAcquisDate);
 		
 		menuItemSoftwareProfesseur = new JMenuItem("Softwares Professeur"); 
-		menuBaseDeDonnée.add(menuItemSoftwareProfesseur);
+		menuBaseDeDonnÃ©e.add(menuItemSoftwareProfesseur);
 		MenuActionSoftwareProfesseur actionSoftwareProfesseur = new MenuActionSoftwareProfesseur();    
 		menuItemSoftwareProfesseur.addActionListener(actionSoftwareProfesseur);
 		
 		menuItemSupprimerUneInstallation = new JMenuItem("Supprimer Installation"); 
-		menuBaseDeDonnée.add(menuItemSupprimerUneInstallation);
+		menuBaseDeDonnÃ©e.add(menuItemSupprimerUneInstallation);
 		MenuActionSupprimerInstallation actionSupprimerInstallation = new MenuActionSupprimerInstallation();    
 		menuItemSupprimerUneInstallation.addActionListener(actionSupprimerInstallation);
 		
@@ -112,7 +112,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	
-	private class menuActionDéconnexion implements ActionListener {
+	private class menuActionDÃ©connexion implements ActionListener {
 		public void  actionPerformed(ActionEvent exit)  {
 			dispose();
 			try {
