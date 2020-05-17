@@ -26,11 +26,6 @@ public class Fenetre extends JFrame {
 	   // this.loginConect=loginConect;   
 	    connection=loginConect.getConnect();
 	
-		//Message de bienvenue
-		/*message = new JLabel("Bienvenue dans l'application réalisée pour le cour de Java 2");
-		message.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
-		message.setHorizontalAlignment(SwingConstants.CENTER);
-		add(message);*/
 	    Image jPanelImage = new Image();
 	    add(jPanelImage);
 		//Menu
