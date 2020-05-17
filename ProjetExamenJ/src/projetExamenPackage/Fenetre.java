@@ -120,7 +120,7 @@ public class Fenetre extends JFrame {
 				LoginFenetre loginFenetre = new LoginFenetre();
 			}
 			catch(SQLException exit1) { 
-				System.out.println(exit1.getMessage());
+				System.out.println(exit1.getMessage()); //Permet de fermer la fenêtre
 			}
 		}
 	} 
