@@ -20,13 +20,13 @@ public class BoutonAnnulation extends JPanel {
 		boutonAnnulation = new JButton("Annulation");
 		add(boutonAnnulation);
 		
-		ActionInsertion actionInsertion= new ActionInsertion();
-		boutonAnnulation.addActionListener(actionInsertion);
+		ActionAnnulation actionAnnulation = new ActionAnnulation();
+		boutonAnnulation.addActionListener(actionAnnulation);
 		
 		setVisible(true);
 	}
 	
-	private class ActionInsertion implements ActionListener{
+	private class ActionAnnulation implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==boutonAnnulation) {
 				nouvelleInstallation.ActionAnnulation(connection);
