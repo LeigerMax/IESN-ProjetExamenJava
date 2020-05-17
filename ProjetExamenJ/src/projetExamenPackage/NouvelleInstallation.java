@@ -13,14 +13,14 @@ public class NouvelleInstallation extends JPanel {
 	private JLabel labelTitre,labelObliger, labelIdInstallation,labelDateInstallation, labelTypeInstallation,labelCommentaires,labelDureeInstallation,labelRefProcedureInstallation,labelValidation,labelDateValidation, labelSoftware,labelMatricule, labelOS,labelAjoutReussi, labelAnnuler;
 	private JTextField zoneTexteIdInstallation, zoneTexteCommentaires,zoneTextRefProcedureInstallation; 
 	private JComboBox<String> comboBoxTypeInstallation,comboxSoftware,comboxMatricule,comboxOS;
-	private String[] listeTypeBool = {"Standard","Personnalisée"};
+	private String[] listeTypeBool = {"Standard","PersonnalisÃ©e"};
 	private JSpinner spinnerDureeInstallation;
 	private SpinnerNumberModel modelSpinner;
 	private JRadioButton boutonAPrevoir, boutonTerminee,boutonEnCours; 
 	private JPanel panneauTitre, panneauFormulaire,panneauBoutons, panneauValidation; 
 	private ButtonGroup boutonGroupe; 
 	private String SqlInto, SqlDelete;
-	private String choixBouton = "Terminée";
+	private String choixBouton = "TerminÃ©e";
 	private ComboxDate panneauDateInstallation,panneauDateAPrevoir;
 	private Integer anulation = 0;
 
@@ -47,14 +47,14 @@ public class NouvelleInstallation extends JPanel {
 		zoneTexteIdInstallation = new JTextField(5); 
 		zoneTexteIdInstallation.setEnabled(false);
 		
-		RécupérerIdInstallation(connection);
+		RÃ©cupÃ©rerIdInstallation(connection);
 		
 		//Date
 		labelDateInstallation = new JLabel("* Date d'installation  : "); 
 		labelDateInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		panneauDateInstallation = new ComboxDate();
 		
-		//Type d'installation : booléen précisant si installation standard ou personnalisée 
+		//Type d'installation : boolÃ©en prÃ©cisant si installation standard ou personnalisÃ©e 
 		labelTypeInstallation = new JLabel("* Type d'installation  : "); 
 		labelTypeInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		comboBoxTypeInstallation = new JComboBox<String>(listeTypeBool);
@@ -66,7 +66,7 @@ public class NouvelleInstallation extends JPanel {
 
 		
 		//Duree Installation PAS OBLIGATOIRE
-		labelDureeInstallation = new JLabel("* Durée Installation  : "); 
+		labelDureeInstallation = new JLabel("* DurÃ©e Installation  : "); 
 		labelDureeInstallation.setHorizontalAlignment(SwingConstants.RIGHT);
 		modelSpinner = new SpinnerNumberModel(0,0,86400,1);
 		spinnerDureeInstallation = new JSpinner(modelSpinner);
@@ -81,7 +81,7 @@ public class NouvelleInstallation extends JPanel {
 		labelValidation = new JLabel("* Validation : "); 
 		labelValidation.setHorizontalAlignment(SwingConstants.RIGHT);
 		boutonAPrevoir = new JRadioButton("A prevoir",false); 
-		boutonTerminee = new JRadioButton("Terminée",true); 
+		boutonTerminee = new JRadioButton("TerminÃ©e",true); 
 		boutonEnCours = new JRadioButton("En cours",false); 
 
 		boutonGroupe = new ButtonGroup();
@@ -118,7 +118,7 @@ public class NouvelleInstallation extends JPanel {
 		labelOS.setHorizontalAlignment(SwingConstants.RIGHT);
 		comboxOS = new JComboBox<String>();
 		
-		RécupérerSoftwareMatriculeOs(connection);		
+		RÃ©cupÃ©rerSoftwareMatriculeOs(connection);		
 
 		//Bouton
 		BoutonInsertion boutonInsertion = new BoutonInsertion(this,connection);
@@ -129,14 +129,14 @@ public class NouvelleInstallation extends JPanel {
 		panneauBoutons.add(boutonInsertion);
 		panneauBoutons.add(boutonAnnulation);
 		
-		//Ajout réussi
-		labelAjoutReussi = new JLabel("Ajout réussi ! "); 
+		//Ajout rÃ©ussi
+		labelAjoutReussi = new JLabel("Ajout rÃ©ussi ! "); 
 		labelAjoutReussi.setForeground(Color.red);
 		labelAjoutReussi.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelAjoutReussi.setVisible(false);
 		
 		//Annuler
-		labelAnnuler = new JLabel("Annulation réussi ! "); 
+		labelAnnuler = new JLabel("Annulation rÃ©ussi ! "); 
 		labelAnnuler.setForeground(Color.red);
 		labelAnnuler.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelAnnuler.setVisible(false);
@@ -178,7 +178,7 @@ public class NouvelleInstallation extends JPanel {
 	
 
 	
-	private void RécupérerIdInstallation(Connection connection) {
+	private void RÃ©cupÃ©rerIdInstallation(Connection connection) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement("select MAX(IdInstallation) from installation ;");
 			TableModelGen idInsallation = AccessBDGen.creerTableModel(prepStat);
@@ -186,12 +186,11 @@ public class NouvelleInstallation extends JPanel {
 			zoneTexteIdInstallation.setText(""+idPlusHaut);
 			}
 		catch(SQLException e) {
-			JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
 	
-	private void RécupérerSoftwareMatriculeOs(Connection connection) {
+	private void RÃ©cupÃ©rerSoftwareMatriculeOs(Connection connection) {
 		try {
 			PreparedStatement prepStatSoftware = connection.prepareStatement("select Nom from Software;");
 			PreparedStatement prepStatMatricule = connection.prepareStatement("select NomPrenom from ResponsableReseaux;");
@@ -225,7 +224,7 @@ public class NouvelleInstallation extends JPanel {
 			 else if(e.getSource()==boutonTerminee && e.getStateChange()==ItemEvent.SELECTED) {
 				 panneauDateAPrevoir.setVisible(false);
 				 labelDateValidation.setVisible(false);
-				 choixBouton = "Terminée";
+				 choixBouton = "TerminÃ©e";
 				}
 			 else if(e.getSource()==boutonEnCours && e.getStateChange()==ItemEvent.SELECTED) {
 				 panneauDateAPrevoir.setVisible(false);
@@ -268,7 +267,7 @@ public class NouvelleInstallation extends JPanel {
 				myPrepStat.setInt(5, (int)spinnerDureeInstallation.getValue());
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "Aucune durée d'installation sélectionnée !","Erreur",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Aucune durÃ©e d'installation sÃ©lectionnÃ©e !","Erreur",JOptionPane.ERROR_MESSAGE);
 			}
 			
 			//RefProcedureInstallation
@@ -279,13 +278,13 @@ public class NouvelleInstallation extends JPanel {
 				myPrepStat.setNull(6, Types.VARCHAR);
 			}
 			
-			//Validation annéePrévoir, moisPrévoir,jourPrévoir;
+			//Validation annÃ©ePrÃ©voir, moisPrÃ©voir,jourPrÃ©voir;
 			if (choixBouton =="A prevoir") {
 				myPrepStat.setString(7, "A prevoir");
 				myPrepStat.setDate(8, new java.sql.Date(panneauDateAPrevoir.getDate().getTime()));
 			}
-			else if (choixBouton =="Terminée") {
-				myPrepStat.setString(7,"Terminée");
+			else if (choixBouton =="TerminÃ©e") {
+				myPrepStat.setString(7,"TerminÃ©e");
 				myPrepStat.setNull(8, Types.DATE);
 			}
 			else if (choixBouton =="En cours") {
@@ -316,7 +315,7 @@ public class NouvelleInstallation extends JPanel {
 			if(comboxMatricule.getSelectedItem().equals("Alexandre Baligant")){
 				myPrepStat.setString(10, "AlBa");
 			}
-			else if(comboxMatricule.getSelectedItem().equals("André Van Kerrebroeck")){
+			else if(comboxMatricule.getSelectedItem().equals("AndrÃ© Van Kerrebroeck")){
 				myPrepStat.setString(10, "AVK");
 			}
 			else if(comboxMatricule.getSelectedItem().equals("Marvin Gobin")){
@@ -343,7 +342,7 @@ public class NouvelleInstallation extends JPanel {
 			else if(comboxOS.getSelectedItem().equals("Windows 10 Professional English")) {
 				myPrepStat.setString(11, "W8ProfEn");
 			}
-			else if(comboxOS.getSelectedItem().equals("Windows 8 Prof Français")) {
+			else if(comboxOS.getSelectedItem().equals("Windows 8 Prof FranÃ§ais")) {
 				myPrepStat.setString(11, "W8ProfFr");
 			}
 			
@@ -352,7 +351,7 @@ public class NouvelleInstallation extends JPanel {
 			anulation = 1;
 			labelAjoutReussi.setVisible(true);
 			labelAnnuler.setVisible(false);
-			réinitialiser(connection);
+			rÃ©initialiser(connection);
 			
 		}
 		catch(SQLException e) {
@@ -360,11 +359,11 @@ public class NouvelleInstallation extends JPanel {
 		}
 	}
 	
-	public void réinitialiser(Connection connection) {
+	public void rÃ©initialiser(Connection connection) {
 		zoneTexteCommentaires.setText("");
 		zoneTextRefProcedureInstallation.setText("");
 		spinnerDureeInstallation.setValue(0);
-		RécupérerIdInstallation(connection);
+		RÃ©cupÃ©rerIdInstallation(connection);
 	} 
 
 
@@ -377,7 +376,7 @@ public class NouvelleInstallation extends JPanel {
 				anulation = 0;
 				labelAjoutReussi.setVisible(false);
 				labelAnnuler.setVisible(true);
-				réinitialiser(connection);
+				rÃ©initialiser(connection);
 			}
 		}
 		catch(SQLException e) {
