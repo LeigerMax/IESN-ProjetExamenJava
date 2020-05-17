@@ -372,7 +372,7 @@ public class NouvelleInstallation extends JPanel {
 			if (anulation == 1) {
 				SqlDelete = "delete from installation order by IdInstallation desc limit 1;";
 				PreparedStatement prepStat = connection.prepareStatement(SqlDelete);
-				int annulation = prepStat.executeUpdate();
+				int annulation = prepStat.executeUpdate(); //Permet de mettre à jour l'id le plus haut
 				anulation = 0;
 				labelAjoutReussi.setVisible(false);
 				labelAnnuler.setVisible(true);
