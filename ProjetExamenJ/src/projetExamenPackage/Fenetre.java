@@ -210,11 +210,11 @@ public class Fenetre extends JFrame {
 		return connection;
 	}
 	
-	public Fenetre getWin() {
+	/*public Fenetre getWin() {
 		return this;
-	}
+	}*/
 	
-	public Container getCont(){
+	/*public Container getCont(){
 		return cont;
-	}
+	}*/
 }
