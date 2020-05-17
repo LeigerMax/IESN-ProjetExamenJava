@@ -186,6 +186,7 @@ public class NouvelleInstallation extends JPanel {
 			zoneTexteIdInstallation.setText(""+idPlusHaut);
 			}
 		catch(SQLException e) {
+			//JOptionPane.showMessageDialog(null,e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
