@@ -10,11 +10,11 @@ import accessBD.*;
 public class Fenetre extends JFrame {
 	
 	private Connection connection;
-	private Login loginConect;
-	private Container cont;
+	//private Login loginConect;
+	//private Container cont;
 	private JLabel message;
 	private JMenuBar menuBarre;
-	private JMenu menuApplication, menuBaseDeDonnÃ©e, menuAide; 
+	private JMenu menuApplication, menuBaseDeDonnée, menuAide; 
 	private JMenuItem menuItemAccueil,menuItemQuitter, menuItemNouvelleInstallation, menuItemLectureTable, menuItemSoftwaresAcquisDate, menuItemSoftwareProfesseur, menuItemSupprimerUneInstallation, menuItemGitHub, menuItemPropos; 
 	private Desktop bureau = Desktop.getDesktop();
 	
@@ -27,11 +27,12 @@ public class Fenetre extends JFrame {
 	    connection=loginConect.getConnect();
 	
 		//Message de bienvenue
-		message = new JLabel("Bienvenue dans l'application rÃ©alisÃ©e pour le cour de Java 2");
+		/*message = new JLabel("Bienvenue dans l'application réalisée pour le cour de Java 2");
 		message.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));
 		message.setHorizontalAlignment(SwingConstants.CENTER);
-		add(message);
-		
+		add(message);*/
+	    Image jPanelImage = new Image();
+	    add(jPanelImage);
 		//Menu
 	    menuBarre = new JMenuBar(); 
 		setJMenuBar(menuBarre);
@@ -39,18 +40,18 @@ public class Fenetre extends JFrame {
 		//JMenu
 		menuApplication = new JMenu("Application");
 		menuBarre.add(menuApplication);
-		menuBaseDeDonnÃ©e = new JMenu("Base de donnÃ©e");
-		menuBarre.add(menuBaseDeDonnÃ©e);
+		menuBaseDeDonnée = new JMenu("Base de donnée");
+		menuBarre.add(menuBaseDeDonnée);
 		menuAide = new JMenu("Aide");
 		menuBarre.add(menuAide);
 
 		
 		//JMenuItem
-		menuItemAccueil = new JMenuItem("DÃ©connexion");
+		menuItemAccueil = new JMenuItem("Déconnexion");
 		menuItemAccueil.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,InputEvent.CTRL_MASK));
 		menuApplication.add(menuItemAccueil);
-		menuActionDÃ©connexion actionDÃ©connexion = new menuActionDÃ©connexion();    
-		menuItemAccueil.addActionListener(actionDÃ©connexion);
+		menuActionDéconnexion actionDéconnexion = new menuActionDéconnexion();    
+		menuItemAccueil.addActionListener(actionDéconnexion);
 		
 		menuItemQuitter = new JMenuItem("Sortie");
 		menuItemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,InputEvent.CTRL_MASK));
@@ -59,27 +60,27 @@ public class Fenetre extends JFrame {
 		menuItemQuitter.addActionListener(actionQuitter);
 		
 		menuItemNouvelleInstallation = new JMenuItem("Nouvelle Installation"); 
-		menuBaseDeDonnÃ©e.add(menuItemNouvelleInstallation);
+		menuBaseDeDonnée.add(menuItemNouvelleInstallation);
 		MenuActionNouvelleInstallation actionNouvelleInstallation = new MenuActionNouvelleInstallation();    
 		menuItemNouvelleInstallation.addActionListener(actionNouvelleInstallation);
 		
 		menuItemLectureTable = new JMenuItem("Lecture des tables"); 
-		menuBaseDeDonnÃ©e.add(menuItemLectureTable);
+		menuBaseDeDonnée.add(menuItemLectureTable);
 		MenuActionLectureTable actionLectureTable = new MenuActionLectureTable();    
 		menuItemLectureTable.addActionListener(actionLectureTable);
 		
 		menuItemSoftwaresAcquisDate = new JMenuItem("Softwares Acquis Date"); 
-		menuBaseDeDonnÃ©e.add(menuItemSoftwaresAcquisDate);
+		menuBaseDeDonnée.add(menuItemSoftwaresAcquisDate);
 		MenuActionSoftwaresAcquisDate actionSoftwaresAcquisDate = new MenuActionSoftwaresAcquisDate();    
 		menuItemSoftwaresAcquisDate.addActionListener(actionSoftwaresAcquisDate);
 		
 		menuItemSoftwareProfesseur = new JMenuItem("Softwares Professeur"); 
-		menuBaseDeDonnÃ©e.add(menuItemSoftwareProfesseur);
+		menuBaseDeDonnée.add(menuItemSoftwareProfesseur);
 		MenuActionSoftwareProfesseur actionSoftwareProfesseur = new MenuActionSoftwareProfesseur();    
 		menuItemSoftwareProfesseur.addActionListener(actionSoftwareProfesseur);
 		
 		menuItemSupprimerUneInstallation = new JMenuItem("Supprimer Installation"); 
-		menuBaseDeDonnÃ©e.add(menuItemSupprimerUneInstallation);
+		menuBaseDeDonnée.add(menuItemSupprimerUneInstallation);
 		MenuActionSupprimerInstallation actionSupprimerInstallation = new MenuActionSupprimerInstallation();    
 		menuItemSupprimerUneInstallation.addActionListener(actionSupprimerInstallation);
 		
@@ -112,7 +113,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	
-	private class menuActionDÃ©connexion implements ActionListener {
+	private class menuActionDéconnexion implements ActionListener {
 		public void  actionPerformed(ActionEvent exit)  {
 			dispose();
 			try {
@@ -120,7 +121,7 @@ public class Fenetre extends JFrame {
 				LoginFenetre loginFenetre = new LoginFenetre();
 			}
 			catch(SQLException exit1) { 
-				System.out.println(exit1.getMessage()); //Permet de fermer la fenÃªtre
+				System.out.println(exit1.getMessage()); //Permet de fermer la fenêtre
 			}
 		}
 	} 

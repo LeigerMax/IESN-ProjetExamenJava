@@ -51,13 +51,13 @@ public class Suppression extends JPanel {
 		boutonSupprimerInstall.addActionListener(actionSupprimer);
 		add(boutonSupprimerInstall);
 		
-		RÃ©cupÃ©rerNomsTableau(connection);
+		RécupérerNomsTableau(connection);
 
 
 		setVisible(true);
 	}
 	
-	private void RÃ©cupÃ©rerNomsTableau(Connection connection) {
+	private void RécupérerNomsTableau(Connection connection) {
 		try {
 			PreparedStatement prepStat = connection.prepareStatement("SELECT libelle FROM familleSoftware;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
@@ -116,7 +116,7 @@ public class Suppression extends JPanel {
 						add(afficherLaTable);
 						validate();
 					}else {
-					JOptionPane.showMessageDialog(null,"Veillez sÃ©lectionner une installation",null, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Veillez sélectionner une installation",null, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
