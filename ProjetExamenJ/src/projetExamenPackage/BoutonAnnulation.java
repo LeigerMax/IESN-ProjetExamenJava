@@ -16,7 +16,7 @@ public class BoutonAnnulation extends JPanel {
 		this.nouvelleInstallation=nouvelleInstallation;
 		this.connection=connection;
 		
-		//Bouton insertion
+		//Bouton Annulation
 		boutonAnnulation = new JButton("Annulation");
 		add(boutonAnnulation);
 		
