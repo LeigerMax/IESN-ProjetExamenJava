@@ -42,7 +42,7 @@ Permet de créer la fenêtre de connexion et d'appeler la classe Login.
 ## NouvelleInstallation
 Permettre l’encodage via un formulaire d’une nouvelle installation et l’insertion de cette nouvelle installation dans la table correspondante de la base de données MySQL.
 
-*** ActionBoutonLogin*** permet de se connecter et d'afficher le programme.
+*** ActionBoutonLogin *** permet de se connecter et d'afficher le programme.
 
 ## Principale
 Lance le programme.
