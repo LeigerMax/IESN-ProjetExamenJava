@@ -21,7 +21,7 @@ public class Fenetre extends JFrame {
 	public Fenetre(Login loginConect) {
 		
 		super("Examen Java ");
-	    setBounds(500,200,800,600);
+	    setBounds(500,200,800,630);
 	    setResizable(false);
 	   // this.loginConect=loginConect;   
 	    connection=loginConect.getConnect();

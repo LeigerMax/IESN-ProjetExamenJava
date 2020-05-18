@@ -138,12 +138,12 @@ public class NouvelleInstallation extends JPanel {
 		//Annuler
 		labelAnnuler = new JLabel("Annulation réussi ! "); 
 		labelAnnuler.setForeground(Color.red);
-		labelAnnuler.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelAnnuler.setHorizontalAlignment(SwingConstants.LEFT);
 		labelAnnuler.setVisible(false);
 		
 		//panneauFormulaire
 		panneauFormulaire = new JPanel( );     
-		panneauFormulaire.setLayout(new GridLayout( 11, 2, 10, 1 ));
+		panneauFormulaire.setLayout(new GridLayout( 13, 2, 10, 1 ));
 		panneauFormulaire.add(labelIdInstallation); 
 		panneauFormulaire.add(zoneTexteIdInstallation); 
 		panneauFormulaire.add(labelDateInstallation); 
@@ -167,11 +167,15 @@ public class NouvelleInstallation extends JPanel {
 		panneauFormulaire.add(labelOS); 
 		panneauFormulaire.add(comboxOS); 
 		add(panneauFormulaire);
-		
+		panneauFormulaire.add(boutonInsertion);
+        panneauFormulaire.add(boutonAnnulation);
+        panneauFormulaire.add(labelAjoutReussi);
+        panneauFormulaire.add(labelAnnuler);
+        
 		//Add panneauBoutons et les labels
-		add(panneauBoutons);
-		add(labelAjoutReussi); ; 
-		add(labelAnnuler);
+		//add(panneauBoutons);
+		//add(labelAjoutReussi); ; 
+		//add(labelAnnuler);
 
 		setVisible(true);
 	}
